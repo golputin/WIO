@@ -22,13 +22,13 @@ export const token = Object.freeze({
 /** DexScreener page for humans (opens in a new tab). */
 export function tokenPageUrl() {
   if (!token.live) return null
-  return `https://dexscreener.com/${token.chain}/${token.pair ?? token.address}`
+  return env.tokenChartUrl ||
+    `https://gmgn.ai/${token.chain}/token/${token.address}`
 }
 
-/** Embeddable chart URL. Operator override wins. */
 export function tokenChartUrl() {
-  if (env.tokenChartUrl) return env.tokenChartUrl
-  const page = tokenPageUrl()
-  if (!page) return null
-  return `${page}?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=15`
+  if (!token.live) return null
+  return env.tokenChartUrl ||
+    `https://gmgn.ai/${token.chain}/token/${token.pair ?? token.address}`
 }
+
