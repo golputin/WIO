@@ -6,7 +6,7 @@ export default function DiscoverPage() {
   return (
     <>
       <Section className="!pb-6 sm:!pb-8">
-        <SectionHeader
+        <SectionHeader as="h1"
           align="left"
           eyebrow="Discover"
           title="What the market is paying attention to."

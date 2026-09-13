@@ -28,7 +28,7 @@ export default function MarketsPage() {
     <>
       <Section className="!pb-6 sm:!pb-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeader
+          <SectionHeader as="h1"
             align="left"
             eyebrow="Markets"
             title={symbol ? `${symbol} at a glance.` : 'Live market intelligence.'}

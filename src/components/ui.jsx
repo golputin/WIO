@@ -11,14 +11,14 @@ export function Section({ id, className = '', children, tone = 'default' }) {
   )
 }
 
-export function SectionHeader({ eyebrow, title, subtitle, align = 'center', className = '' }) {
+export function SectionHeader({ eyebrow, title, subtitle, align = 'center', className = '', as: Heading = 'h2' }) {
   const alignCls = align === 'center' ? 'mx-auto text-center' : ''
   return (
     <div className={`max-w-2xl ${alignCls} ${className}`}>
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+      <Heading className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         {title}
-      </h2>
+      </Heading>
       {subtitle && <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{subtitle}</p>}
     </div>
   )
