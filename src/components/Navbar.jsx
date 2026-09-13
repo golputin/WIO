@@ -9,16 +9,15 @@ import WalletConnect from './WalletConnect.jsx'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  // Mobile menu is open only while the route it was opened on is still active — no effect needed.
+  const [menuOpenedAt, setMenuOpenedAt] = useState(null)
   const [searchOpen, setSearchOpen] = useState(false)
   const { scrollY } = useScroll()
   const location = useLocation()
+  const menuOpen = menuOpenedAt === location.pathname
+  const setMenuOpen = (next) => setMenuOpenedAt((typeof next === 'function' ? next(menuOpen) : next) ? location.pathname : null)
 
   useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 8))
-
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [location.pathname])
 
   useEffect(() => {
     const onKey = (e) => {

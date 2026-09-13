@@ -19,22 +19,25 @@ export default function SearchDialog({ open, onClose, onSelect, placeholder = 'S
   const inputRef = useRef(null)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (open) {
-      setQuery('')
-      setTimeout(() => inputRef.current?.focus(), 30)
-    }
-  }, [open])
+  // Query is reset from the close event itself, so the effect only synchronizes focus.
+  const close = () => {
+    setQuery('')
+    onClose()
+  }
 
   useEffect(() => {
     if (!open) return undefined
-    const onKey = (e) => e.key === 'Escape' && onClose()
+    const t = setTimeout(() => inputRef.current?.focus(), 30)
+    const onKey = (e) => e.key === 'Escape' && close()
     document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
+    return () => {
+      clearTimeout(t)
+      document.removeEventListener('keydown', onKey)
+    }
   }, [open, onClose])
 
   const select = (symbol) => {
-    onClose()
+    close()
     if (onSelect) onSelect(symbol)
     else navigate(`/markets?symbol=${encodeURIComponent(symbol)}`)
   }
@@ -47,7 +50,7 @@ export default function SearchDialog({ open, onClose, onSelect, placeholder = 'S
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+          onMouseDown={(e) => e.target === e.currentTarget && close()}
         >
           <motion.div
             role="dialog"
