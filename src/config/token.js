@@ -6,7 +6,7 @@ import { env } from './environment.js'
  * no chart, no CA, no numbers.
  *
  * VITE_TOKEN_ADDRESS   contract / mint address (the "CA")
- * VITE_TOKEN_CHAIN     DexScreener chain slug: solana | ethereum | base | bsc | arbitrum ...
+ * VITE_TOKEN_CHAIN     DexScreener chain slug: robinhood | solana | ethereum | base | bsc | arbitrum ...
  * VITE_TOKEN_SYMBOL    ticker shown in the UI (default LENS)
  * VITE_TOKEN_CHART_URL optional full embed URL; overrides the DexScreener default
  * VITE_TOKEN_PAIR      optional DexScreener pair address (better chart than token address)

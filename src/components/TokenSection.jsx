@@ -5,7 +5,7 @@ import ContractAddressButton from './ContractAddressButton.jsx'
 import { MarketLensMark } from './MarketLensLogo.jsx'
 import { Badge, Reveal, Section } from './ui.jsx'
 
-const CHAIN_LABELS = { solana: 'Solana', ethereum: 'Ethereum', base: 'Base', bsc: 'BNB Chain', arbitrum: 'Arbitrum' }
+const CHAIN_LABELS = { robinhood: 'Robinhood Chain', solana: 'Solana', ethereum: 'Ethereum', base: 'Base', bsc: 'BNB Chain', arbitrum: 'Arbitrum' }
 
 /** Chart panel: live DexScreener embed when configured, otherwise an honest pre-launch state. */
 function TokenChart() {
