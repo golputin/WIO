@@ -7,7 +7,7 @@ export default function SymbolPicker({ value, onChange, label = 'Change asset', 
   const [open, setOpen] = useState(false)
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className={`btn-secondary !px-3.5 !py-2 text-xs ${className}`}>
+      <button type="button" onClick={() => setOpen(true)} className={`btn-secondary shrink-0 !px-3.5 !py-2 text-xs whitespace-nowrap ${className}`}>
         <Search className="size-3.5" />
         {value ? `${value} · ${label}` : 'Search asset'}
       </button>
