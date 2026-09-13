@@ -1,34 +1,45 @@
 /** Static product navigation — copy only, no market data. */
 
 export const NAV_LINKS = [
+  { label: 'Home', to: '/', end: true },
   { label: 'Markets', to: '/markets' },
-  { label: 'Discover', to: '/discover' },
-  { label: 'Watchlist', to: '/watchlist' },
-  { label: 'Alerts', to: '/alerts' },
+  { label: 'News', to: '/news' },
+  { label: 'Filings', to: '/filings' },
+  { label: 'Analytics', to: '/analytics' },
   { label: 'Rewards', to: '/rewards' },
 ]
 
 export const FOOTER_COLUMNS = [
   {
-    heading: 'Product',
-    links: NAV_LINKS,
-  },
-  {
-    heading: 'Company',
+    heading: 'Platform',
     links: [
-      { label: 'About', to: '/about' },
-      { label: 'Documentation', to: '/docs', external: false },
-      { label: 'Blog', to: '/blog' },
-      { label: 'Contact', to: '/contact' },
+      { label: 'Markets', to: '/markets' },
+      { label: 'News', to: '/news' },
+      { label: 'Filings', to: '/filings' },
+      { label: 'Analytics', to: '/analytics' },
+      { label: 'Rewards', to: '/rewards' },
     ],
   },
   {
-    heading: 'Legal',
+    heading: 'Tools',
     links: [
-      { label: 'Terms', to: '/legal/terms' },
-      { label: 'Privacy', to: '/legal/privacy' },
-      { label: 'Risk Disclosure', to: '/legal/risk' },
-      { label: 'Reward Disclosure', to: '/legal/rewards' },
+      { label: 'Watchlist', to: '/watchlist' },
+      { label: 'Discover', to: '/discover' },
+      { label: 'Alerts', to: '/alerts' },
+      { label: 'About', to: '/about' },
+    ],
+  },
+  {
+    heading: 'Resources',
+    links: [
+      { label: 'Documentation', to: 'https://github.com/golputin/WIO/tree/main/docs', external: true },
+      { label: 'Rewards (read-only) spec', to: 'https://github.com/golputin/WIO/blob/main/docs/REWARDS_READ_ONLY.md', external: true },
     ],
   },
 ]
+
+export const BRAND = Object.freeze({
+  name: 'MarketLens Capital',
+  tagline: 'Markets. Clarity. Opportunity.',
+  positioning: 'Real Data. Deeper Intelligence.',
+})
