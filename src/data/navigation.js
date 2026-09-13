@@ -29,13 +29,6 @@ export const FOOTER_COLUMNS = [
       { label: 'About', to: '/about' },
     ],
   },
-  {
-    heading: 'Resources',
-    links: [
-      { label: 'Documentation', to: 'https://github.com/golputin/WIO/tree/main/docs', external: true },
-      { label: 'Rewards (read-only) spec', to: 'https://github.com/golputin/WIO/blob/main/docs/REWARDS_READ_ONLY.md', external: true },
-    ],
-  },
 ]
 
 export const BRAND = Object.freeze({
@@ -43,3 +36,5 @@ export const BRAND = Object.freeze({
   tagline: 'Markets. Clarity. Opportunity.',
   positioning: 'Real Data. Deeper Intelligence.',
 })
+
+/* Resources/Documentation links intentionally removed from the footer. */
