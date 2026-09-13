@@ -16,10 +16,15 @@ Real-time market intelligence, AI-powered analysis, smart alerts, and stock rewa
 ## Getting started
 
 ```bash
-npm install
-cp .env.example .env.local   # fill in provider URLs
-npm run dev
+npm install                  # installs frontend + server/ dependencies
+cp .env.example .env.local   # frontend → local backend URLs (pre-filled)
+cp server/.env.example server/.env
+npm run dev:all              # data backend on :8787 + frontend on :5173
 ```
+
+Market data works immediately with no API keys (Yahoo Finance). Optional keys unlock earnings,
+SEC filings and AI filing analysis — see [docs/CONFIGURATION.md](docs/CONFIGURATION.md) for every
+setting, including the rewards backend, reward contract and token.
 
 Production build:
 
