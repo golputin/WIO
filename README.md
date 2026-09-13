@@ -37,6 +37,36 @@ The UI never displays fabricated market, reward, or protocol values. Every numbe
 Privileged operations (AI keys, keeper, RPC secrets) must live behind a backend. The frontend only
 talks to backend endpoints and the user's wallet.
 
+## Routes
+
+| Route        | Page                                                                 |
+| ------------ | -------------------------------------------------------------------- |
+| `/`          | Home — hero, live ticker, features, Why Is It Moving?, filings, daily brief, rewards, about, CTA |
+| `/markets`   | Symbol analysis (`?symbol=AAPL`), chart, catalysts, news, filings     |
+| `/discover`  | Trending, top movers, high volume, earnings, filings, market events   |
+| `/watchlist` | Live watchlist with local (dev) or backend (prod) persistence         |
+| `/alerts`    | Alert builder + alert list (requires alerts backend)                  |
+| `/rewards`   | Claimable balances, claim flows, history, protocol status, mechanism  |
+| `/about`     | Principles, capabilities, reward mechanism, community                 |
+
+## Environment variables
+
+All variables are optional; each unset provider yields an explicit "not configured" state.
+
+| Variable                       | Purpose                                                   |
+| ------------------------------ | --------------------------------------------------------- |
+| `VITE_MARKET_API_URL`          | Quotes, indices, charts, movers, earnings (backend proxy)  |
+| `VITE_NEWS_API_URL`            | News & catalysts                                           |
+| `VITE_FILINGS_API_URL`         | SEC / company filing intelligence                          |
+| `VITE_ANALYTICS_API_URL`       | "Why Is It Moving?" analysis service                       |
+| `VITE_ALERTS_API_URL`          | Alerts backend                                             |
+| `VITE_USER_API_URL`            | Authenticated user backend (watchlist persistence)         |
+| `VITE_REWARDS_API_URL`         | Reward balances, history, protocol/keeper status           |
+| `VITE_RPC_URL`, `VITE_CHAIN_ID`| Chain used for wallet connection and claims                |
+| `VITE_REWARD_CONTRACT_ADDRESS` | Reward contract                                            |
+| `VITE_EXPLORER_URL`            | Block explorer base for transaction links                  |
+| `VITE_X_URL`                   | Community link (X only)                                    |
+
 ## Architecture
 
 ```
