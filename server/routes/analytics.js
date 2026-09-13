@@ -1,6 +1,8 @@
 import { Router } from 'express'
+import { cached } from '../lib/cache.js'
 import { cleanSymbol, route } from '../lib/route.js'
 import * as finnhub from '../providers/finnhub.js'
+import * as llm from '../providers/llm.js'
 import * as sec from '../providers/sec.js'
 import * as yahoo from '../providers/yahoo.js'
 
@@ -9,6 +11,36 @@ export const analytics = Router()
 
 const HOURS = 60 * 60_000
 const pct = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`
+const SENTIMENT_TTL = 15 * 60_000
+
+const SENTIMENT_SYSTEM_PROMPT = `You classify market sentiment from evidence only. Do not predict prices and do not add outside knowledge.
+Return JSON only: {"label":"Bullish|Neutral|Bearish|null","score":number|null,"confidence":number|null}. Confidence is evidence strength, not probability. Use null when evidence is insufficient.
+Use null for both when evidence is insufficient or contradictory. Score is evidence direction strength from 0 to 100, not probability of a price move.
+Bullish means the retrieved evidence leans positive, Bearish means it leans negative, Neutral means balanced or non-directional.`
+
+function normalizeSentiment(raw) {
+  const label = raw?.label
+  const score = raw?.score
+  const confidence = raw?.confidence
+  if (label === null || score === null || confidence === null) return null
+  if (!['Bullish', 'Neutral', 'Bearish'].includes(label) || !Number.isFinite(score) || !Number.isFinite(confidence)) return null
+  return {
+    label,
+    score: Math.max(0, Math.min(100, Math.round(score))),
+    confidence: Math.max(0, Math.min(100, Math.round(confidence))),
+  }
+}
+
+async function analyzeSentiment(symbol, evidence) {
+  if (!llm.configured() || evidence.sources.length === 0) return null
+  return cached(`sentiment:${symbol}:${JSON.stringify(evidence)}`, SENTIMENT_TTL, async () => {
+    try {
+      return normalizeSentiment(await llm.completeJson(SENTIMENT_SYSTEM_PROMPT, JSON.stringify(evidence)))
+    } catch {
+      return null
+    }
+  })
+}
 
 /**
  * "Why Is It Moving?" — assembled only from retrieved sources:
@@ -54,8 +86,27 @@ analytics.get('/why-moving/:symbol', route(async (req) => {
   sources.push({ label: 'Yahoo Finance', url: `https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}` })
 
   const catalystDetected = factors.some((f) => f.type === 'news' || f.type === 'filing')
-  return { symbol, quote, catalystDetected, factors, sentiment: null, confidence: null, sources, generatedAt: new Date().toISOString() }
+  const evidence = {
+    symbol,
+    quote: { price: quote.price, change: quote.change, changePercent: quote.changePercent, volume: quote.volume, asOf: quote.asOf },
+    factors: factors.map(({ type, title, detail, sourceLabel, observedAt }) => ({ type, title, detail, sourceLabel, observedAt })),
+    sources: sources.map(({ label, url }) => ({ label, url })),
+  }
+  const analysis = await analyzeSentiment(symbol, evidence)
+  const sentiment = analysis ? { label: analysis.label, score: analysis.score } : null
+  const confidence = analysis?.confidence ?? null
+  return { symbol, quote, catalystDetected, factors, sentiment, confidence, sources, generatedAt: new Date().toISOString() }
 }))
+
+function evidenceStrength({ factors, sources, quote }) {
+  let score = 20
+  score += Math.min(30, factors.filter((f) => f.type === 'news').length * 10)
+  score += factors.some((f) => f.type === 'filing') ? 20 : 0
+  score += factors.some((f) => f.type === 'signal') ? 15 : 0
+  score += sources.length >= 3 ? 10 : sources.length >= 2 ? 5 : 0
+  score += typeof quote.volume === 'number' ? 5 : 0
+  return Math.min(100, score)
+}
 
 // Sentiment scoring needs a dedicated provider; report absence instead of inventing a score.
 analytics.get('/sentiment/:symbol', route(() => {
