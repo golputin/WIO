@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { env } from '../config/environment.js'
 import { FOOTER_COLUMNS } from '../data/navigation.js'
+import ContractAddressButton from './ContractAddressButton.jsx'
 import MarketLensLogo from './MarketLensLogo.jsx'
 import XIcon from './XIcon.jsx'
 
@@ -12,14 +13,17 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <MarketLensLogo height={28} />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">See the Market Different. Real data, deeper intelligence, on-chain opportunities.</p>
-            <a
-              href={env.xUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="mt-5 inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium text-fg transition hover:border-gold/30 hover:bg-surface-2"
-            >
-              <XIcon className="size-3.5" /> Follow on X
-            </a>
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <a
+                href={env.xUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex h-9 items-center gap-2 rounded-lg border border-border px-3 text-sm font-medium text-fg transition hover:border-gold/30 hover:bg-surface-2"
+              >
+                <XIcon className="size-3.5" /> Follow on X
+              </a>
+              <ContractAddressButton size="sm" />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">

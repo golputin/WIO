@@ -22,6 +22,11 @@ export const env = Object.freeze({
   rewardContractAddress: read('VITE_REWARD_CONTRACT_ADDRESS'),
   explorerUrl: read('VITE_EXPLORER_URL'),
   xUrl: read('VITE_X_URL') ?? 'https://x.com',
+  tokenAddress: read('VITE_TOKEN_ADDRESS'),
+  tokenChain: read('VITE_TOKEN_CHAIN')?.toLowerCase() ?? null,
+  tokenSymbol: read('VITE_TOKEN_SYMBOL'),
+  tokenPair: read('VITE_TOKEN_PAIR'),
+  tokenChartUrl: read('VITE_TOKEN_CHART_URL'),
   isDev: Boolean(import.meta.env.DEV),
 })
 

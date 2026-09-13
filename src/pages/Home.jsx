@@ -7,6 +7,7 @@ import FilingSection from '../components/FilingSection.jsx'
 import Hero from '../components/Hero.jsx'
 import MarketTicker from '../components/MarketTicker.jsx'
 import RewardsSection from '../components/RewardsSection.jsx'
+import TokenSection from '../components/TokenSection.jsx'
 import WhyMovingSection from '../components/WhyMovingSection.jsx'
 
 export default function HomePage() {
@@ -18,6 +19,7 @@ export default function HomePage() {
       <WhyMovingSection />
       <FilingSection />
       <DailyBriefSection />
+      <TokenSection />
       <RewardsSection />
       <AboutSection />
       <CommunitySection />

@@ -3,6 +3,7 @@ import { Menu, Search, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '../data/navigation.js'
+import ContractAddressButton from './ContractAddressButton.jsx'
 import MarketLensLogo from './MarketLensLogo.jsx'
 import MarketStatusPill from './MarketStatusPill.jsx'
 import SearchDialog from './SearchDialog.jsx'
@@ -98,6 +99,9 @@ export default function Navbar() {
                 ⌘K
               </kbd>
             </button>
+            <div className="hidden 2xl:block">
+              <ContractAddressButton size="sm" />
+            </div>
             <div className="hidden sm:block">
               <WalletConnect size="sm" />
             </div>
@@ -148,8 +152,9 @@ export default function Navbar() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-4 border-t border-border pt-4 sm:hidden">
-                  <WalletConnect className="[&>button]:w-full [&>button]:justify-center" />
+                <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4">
+                  <ContractAddressButton size="md" className="justify-center" />
+                  <WalletConnect className="sm:hidden [&>button]:w-full [&>button]:justify-center" />
                 </div>
               </div>
             </motion.div>
