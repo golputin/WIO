@@ -42,7 +42,8 @@ const base = () => env.rewardsApiUrl
 export async function getRewardAssets(signal) {
   const res = await request(base(), '/assets', { signal, providerLabel: LABEL })
   if (res.status !== 'ok') return res
-  const assets = Array.isArray(res.data) ? res.data.map(normalizeRewardAsset).filter(Boolean) : []
+  const rawAssets = Array.isArray(res.data) ? res.data : Array.isArray(res.data?.assets) ? res.data.assets : []
+  const assets = rawAssets.map((asset) => normalizeRewardAsset({ ...asset, tokenAddress: asset.tokenAddress ?? asset.contractAddress, enabled: asset.configured === true })).filter(Boolean)
   return ok(assets)
 }
 
