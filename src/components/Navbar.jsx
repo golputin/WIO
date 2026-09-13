@@ -4,8 +4,28 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '../data/navigation.js'
 import MarketLensLogo from './MarketLensLogo.jsx'
+import MarketStatusPill from './MarketStatusPill.jsx'
 import SearchDialog from './SearchDialog.jsx'
 import WalletConnect from './WalletConnect.jsx'
+
+function DesktopLink({ to, end, label }) {
+  return (
+    <NavLink to={to} end={end} className="group relative block px-3 py-2 text-[13px] font-medium">
+      {({ isActive }) => (
+        <>
+          <span className={`transition-colors ${isActive ? 'text-fg' : 'text-muted group-hover:text-fg-2'}`}>{label}</span>
+          {isActive && (
+            <motion.span
+              layoutId="nav-active"
+              className="absolute inset-x-3 -bottom-[1px] h-px bg-gold"
+              transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+            />
+          )}
+        </>
+      )}
+    </NavLink>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -17,7 +37,7 @@ export default function Navbar() {
   const menuOpen = menuOpenedAt === location.pathname
   const setMenuOpen = (next) => setMenuOpenedAt((typeof next === 'function' ? next(menuOpen) : next) ? location.pathname : null)
 
-  useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 8))
+  useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 12))
 
   useEffect(() => {
     const onKey = (e) => {
@@ -30,34 +50,35 @@ export default function Navbar() {
     return () => document.removeEventListener('keydown', onKey)
   }, [])
 
-  const linkCls = ({ isActive }) =>
-    `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-      isActive ? 'bg-surface-2 text-gold' : 'text-fg-2 hover:bg-surface-2 hover:text-fg'
-    }`
+  const compact = scrolled || menuOpen
 
   return (
     <>
       <motion.header
-        className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ${
-          scrolled
-            ? 'border-border/80 bg-surface/70 shadow-[0_1px_0_rgba(11,31,58,0.02)] backdrop-blur-xl'
-            : 'border-transparent bg-bg/0'
+        className={`sticky top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300 ${
+          compact ? 'border-border bg-bg/75 backdrop-blur-xl' : 'border-transparent bg-bg/0'
         }`}
-        initial={{ y: -16, opacity: 0 }}
+        initial={{ y: -12, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
-        <nav className="container-x flex h-16 items-center justify-between gap-4" aria-label="Primary">
-          <Link to="/" className="shrink-0 rounded-lg" aria-label="MarketLens home">
-            <MarketLensLogo height={28} />
-          </Link>
+        <nav
+          className={`container-x flex items-center justify-between gap-4 transition-[height] duration-300 ${
+            compact ? 'h-14' : 'h-16'
+          }`}
+          aria-label="Primary"
+        >
+          <div className="flex min-w-0 items-center gap-6">
+            <Link to="/" className="shrink-0 rounded-md" aria-label="MarketLens Capital home">
+              <MarketLensLogo height={26} />
+            </Link>
+            <MarketStatusPill className="hidden lg:inline-flex" />
+          </div>
 
-          <ul className="hidden items-center gap-1 lg:flex">
+          <ul className="hidden items-center lg:flex">
             {NAV_LINKS.map((l) => (
               <li key={l.to}>
-                <NavLink to={l.to} className={linkCls}>
-                  {l.label}
-                </NavLink>
+                <DesktopLink {...l} />
               </li>
             ))}
           </ul>
@@ -66,25 +87,24 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="btn-ghost !px-2.5 !py-2 sm:!px-3"
+              className="inline-flex h-9 items-center gap-2 rounded-lg border border-border bg-surface/50 px-2.5 text-sm text-muted transition hover:border-border-strong hover:text-fg md:w-52 md:justify-between md:px-3"
               aria-label="Search assets"
             >
-              <Search className="size-4" />
-              <span className="hidden text-muted md:inline">Search</span>
-              <kbd className="hidden rounded-md border border-border bg-bg px-1.5 py-0.5 font-mono text-[10px] text-muted md:inline">
+              <span className="inline-flex items-center gap-2">
+                <Search className="size-4" />
+                <span className="hidden text-[13px] md:inline">Search markets</span>
+              </span>
+              <kbd className="hidden rounded border border-border bg-bg px-1.5 py-0.5 font-mono text-[10px] text-dim md:inline">
                 ⌘K
               </kbd>
             </button>
             <div className="hidden sm:block">
               <WalletConnect size="sm" />
             </div>
-            <Link to="/rewards" className="btn-primary hidden !px-4 !py-2 text-xs sm:inline-flex">
-              Get Started
-            </Link>
             <button
               type="button"
               onClick={() => setMenuOpen((o) => !o)}
-              className="btn-ghost !px-2.5 !py-2 lg:hidden"
+              className="inline-flex size-9 items-center justify-center rounded-lg border border-border text-fg-2 transition hover:bg-surface-2 lg:hidden"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
@@ -101,20 +121,35 @@ export default function Navbar() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.22 }}
-              className="overflow-hidden border-t border-border bg-surface/95 backdrop-blur-xl lg:hidden"
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden border-t border-border bg-bg/95 backdrop-blur-xl lg:hidden"
             >
-              <div className="container-x flex flex-col gap-1 py-3">
-                {NAV_LINKS.map((l) => (
-                  <NavLink key={l.to} to={l.to} className={linkCls}>
-                    {l.label}
-                  </NavLink>
-                ))}
-                <div className="mt-2 flex flex-col gap-2 border-t border-border pt-3 sm:hidden">
-                  <WalletConnect />
-                  <Link to="/rewards" className="btn-primary">
-                    Get Started
-                  </Link>
+              <div className="container-x py-4">
+                <MarketStatusPill className="mb-3" />
+                <ul className="divide-y divide-border">
+                  {NAV_LINKS.map((l) => (
+                    <li key={l.to}>
+                      <NavLink
+                        to={l.to}
+                        end={l.end}
+                        className={({ isActive }) =>
+                          `flex items-center justify-between py-3 text-[15px] font-medium transition-colors ${
+                            isActive ? 'text-gold' : 'text-fg-2 hover:text-fg'
+                          }`
+                        }
+                      >
+                        {({ isActive }) => (
+                          <>
+                            {l.label}
+                            {isActive && <span className="size-1.5 rounded-full bg-gold" aria-hidden="true" />}
+                          </>
+                        )}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 border-t border-border pt-4 sm:hidden">
+                  <WalletConnect className="[&>button]:w-full [&>button]:justify-center" />
                 </div>
               </div>
             </motion.div>

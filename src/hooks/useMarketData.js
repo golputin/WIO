@@ -8,6 +8,10 @@ import { useAsyncResource } from './useAsyncResource.js'
 const QUOTE_REFRESH_MS = 15_000
 const INDEX_REFRESH_MS = 20_000
 
+export function useMarketStatus() {
+  return useAsyncResource((signal) => marketApi.getMarketStatus(signal), { refreshMs: 60_000 })
+}
+
 export function useIndices() {
   return useAsyncResource((signal) => marketApi.getIndices(signal), { refreshMs: INDEX_REFRESH_MS })
 }
