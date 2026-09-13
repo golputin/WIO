@@ -1,6 +1,7 @@
 import { ArrowUpRight, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { changeTone, formatChange, formatCompact, formatPrice } from '../utils/formatters.js'
+import { marketPath } from '../utils/routes.js'
 import { SkeletonRow } from './LoadingState.jsx'
 import AssetLogo from './AssetLogo.jsx'
 import { ChangeText } from './ui.jsx'
@@ -27,7 +28,7 @@ export function QuoteRow({ q, onRemove, showVolume = true }) {
     <li className="group flex items-center gap-3 py-3 sm:gap-4">
       <AssetLogo symbol={q.symbol} size="sm" />
       <div className="min-w-0 flex-1">
-        <Link to={`/markets?symbol=${encodeURIComponent(q.symbol)}`} className="font-semibold text-fg hover:text-gold">
+        <Link to={marketPath(q.symbol)} className="font-semibold text-fg hover:text-gold">
           {q.symbol}
         </Link>
         <p className="truncate text-xs text-muted">{q.name}</p>
@@ -46,7 +47,7 @@ export function QuoteRow({ q, onRemove, showVolume = true }) {
         </p>
       </div>
       <Link
-        to={`/markets?symbol=${encodeURIComponent(q.symbol)}`}
+        to={marketPath(q.symbol)}
         aria-label={`Open analysis for ${q.symbol}`}
         className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-surface-2 hover:text-gold"
       >

@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { providers } from '../config/environment.js'
 import { useAssetSearch } from '../hooks/useMarketData.js'
 import { useDebounce } from '../hooks/useDebounce.js'
+import { marketPath } from '../utils/routes.js'
 import EmptyState from './EmptyState.jsx'
 import { Skeleton } from './LoadingState.jsx'
 
 /**
  * Global asset search. Results come from the market provider; without one we say so.
- * `onSelect(symbol)` overrides default navigation to /markets?symbol=.
+ * `onSelect(symbol)` overrides default navigation to /markets/:symbol.
  */
 export default function SearchDialog({ open, onClose, onSelect, placeholder = 'Search stocks, ETFs, indices' }) {
   const [query, setQuery] = useState('')
@@ -39,7 +40,7 @@ export default function SearchDialog({ open, onClose, onSelect, placeholder = 'S
   const select = (symbol) => {
     close()
     if (onSelect) onSelect(symbol)
-    else navigate(`/markets?symbol=${encodeURIComponent(symbol)}`)
+    else navigate(marketPath(symbol))
   }
 
   return (

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { providers } from '../config/environment.js'
 import { useEarnings, useMarketEvents, useMovers, useRecentFilings } from '../hooks/useMarketData.js'
 import { formatDate, formatDateTime } from '../utils/formatters.js'
+import { marketPath } from '../utils/routes.js'
 import EmptyState from './EmptyState.jsx'
 import { SkeletonText } from './LoadingState.jsx'
 import QuoteList, { QuoteListSkeleton } from './QuoteList.jsx'
@@ -90,7 +91,7 @@ function EarningsCard() {
         {(res.data ?? []).slice(0, 8).map((e) => (
           <li key={`${e.symbol}-${e.date}`} className="flex items-center justify-between gap-3 py-3 text-sm">
             <div className="min-w-0">
-              <Link to={`/markets?symbol=${encodeURIComponent(e.symbol)}`} className="font-semibold text-fg hover:text-gold">
+              <Link to={marketPath(e.symbol)} className="font-semibold text-fg hover:text-gold">
                 {e.symbol}
               </Link>
               <p className="truncate text-xs text-muted">{e.name}</p>
@@ -124,7 +125,7 @@ function FilingsCard() {
           <li key={f.id ?? `${f.symbol}-${f.filedAt}`} className="flex items-center justify-between gap-3 py-3 text-sm">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <Link to={`/markets?symbol=${encodeURIComponent(f.symbol)}`} className="font-semibold text-fg hover:text-gold">
+                <Link to={marketPath(f.symbol)} className="font-semibold text-fg hover:text-gold">
                   {f.symbol}
                 </Link>
                 {f.formType && <Badge tone="blue">{f.formType}</Badge>}

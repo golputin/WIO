@@ -1,5 +1,5 @@
 import { Bookmark, BookmarkCheck } from 'lucide-react'
-import { useSearchParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import FilingIntelligence from '../components/FilingIntelligence.jsx'
 import MarketDashboard from '../components/MarketDashboard.jsx'
 import MarketTicker from '../components/MarketTicker.jsx'
@@ -9,20 +9,27 @@ import WhyMoving from '../components/WhyMoving.jsx'
 import { Reveal, Section, SectionHeader } from '../components/ui.jsx'
 import { useMovers } from '../hooks/useMarketData.js'
 import { useWatchlist } from '../hooks/useWatchlist.js'
+import { marketPath } from '../utils/routes.js'
 
 /**
- * /markets?symbol=XYZ — full analysis view for one asset.
+ * /markets/:symbol — full analysis view for one asset.
  * Without a symbol, defaults to the first live trending asset (never a hardcoded ticker).
+ * Legacy `/markets?symbol=XYZ` links redirect to the path form.
  */
 export default function MarketsPage() {
-  const [params, setParams] = useSearchParams()
+  const { symbol: paramSymbol } = useParams()
+  const [params] = useSearchParams()
+  const navigate = useNavigate()
   const trending = useMovers('trending')
-  const picked = params.get('symbol')?.toUpperCase() || null
+  const picked = paramSymbol?.toUpperCase() || null
   const symbol = picked ?? (trending.state === 'ok' ? trending.data?.[0]?.symbol ?? null : null)
   const watchlist = useWatchlist()
   const watched = symbol ? watchlist.has(symbol) : false
 
-  const setSymbol = (s) => setParams(s ? { symbol: s.toUpperCase() } : {}, { replace: false })
+  const legacySymbol = params.get('symbol')
+  if (!paramSymbol && legacySymbol) return <Navigate to={marketPath(legacySymbol)} replace />
+
+  const setSymbol = (s) => navigate(s ? marketPath(s) : '/markets')
 
   return (
     <>

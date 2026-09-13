@@ -47,7 +47,11 @@ talks to backend endpoints and the user's wallet.
 | Route        | Page                                                                 |
 | ------------ | -------------------------------------------------------------------- |
 | `/`          | Home — hero, live ticker, features, Why Is It Moving?, filings, daily brief, rewards, about, CTA |
-| `/markets`   | Symbol analysis (`?symbol=AAPL`), chart, catalysts, news, filings     |
+| `/markets`   | Symbol analysis for the first live trending asset                     |
+| `/markets/:symbol` | Full analysis for one asset (`/markets/AAPL`) — chart, catalysts, news, filings. Legacy `?symbol=` redirects here |
+| `/news`      | Verified headlines (market-wide or `?symbol=`), trending filter, daily brief |
+| `/filings`   | Filing intelligence for a company (`?symbol=`) + live recent-filings feed |
+| `/analytics` | Why Is It Moving? — catalysts, sentiment, confidence with evidence (`?symbol=`) |
 | `/discover`  | Trending, top movers, high volume, earnings, filings, market events   |
 | `/watchlist` | Live watchlist with local (dev) or backend (prod) persistence         |
 | `/alerts`    | Alert builder + alert list (requires alerts backend)                  |
