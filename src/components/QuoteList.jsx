@@ -2,7 +2,7 @@ import { ArrowUpRight, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { changeTone, formatChange, formatCompact, formatPrice } from '../utils/formatters.js'
 import { SkeletonRow } from './LoadingState.jsx'
-import { AssetMonogram } from './RewardCard.jsx'
+import AssetLogo from './AssetLogo.jsx'
 import { ChangeText } from './ui.jsx'
 
 /**
@@ -25,7 +25,7 @@ export function QuoteRow({ q, onRemove, showVolume = true }) {
   const price = formatPrice(q.price, q.currency)
   return (
     <li className="group flex items-center gap-3 py-3 sm:gap-4">
-      <AssetMonogram symbol={q.symbol} size="sm" />
+      <AssetLogo symbol={q.symbol} size="sm" />
       <div className="min-w-0 flex-1">
         <Link to={`/markets?symbol=${encodeURIComponent(q.symbol)}`} className="font-semibold text-fg hover:text-gold">
           {q.symbol}

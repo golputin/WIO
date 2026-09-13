@@ -5,7 +5,7 @@ import { useWallet } from '../hooks/useWallet.jsx'
 import { formatDate, formatDateTime, formatTokenAmount, shortHash } from '../utils/formatters.js'
 import EmptyState from './EmptyState.jsx'
 import LoadingState from './LoadingState.jsx'
-import { AssetMonogram } from './RewardCard.jsx'
+import AssetLogo from './AssetLogo.jsx'
 import { Badge } from './ui.jsx'
 import WalletConnect from './WalletConnect.jsx'
 
@@ -107,7 +107,7 @@ export default function RewardHistory({ className = '' }) {
                     </td>
                     <td className="px-4 py-3.5">
                       <span className="inline-flex items-center gap-2.5 font-semibold text-fg">
-                        <AssetMonogram symbol={e.symbol} size="sm" /> {e.symbol}
+                        <AssetLogo symbol={e.symbol} size="sm" /> {e.symbol}
                       </span>
                     </td>
                     <td className="tabular px-4 py-3.5 text-right font-semibold text-fg">
@@ -131,7 +131,7 @@ export default function RewardHistory({ className = '' }) {
               <li key={e.id ?? `${e.txHash}-${e.symbol}-${e.distributedAt}`} className="flex flex-col gap-2 p-5">
                 <div className="flex items-center justify-between gap-3">
                   <span className="inline-flex items-center gap-2.5 font-semibold text-fg">
-                    <AssetMonogram symbol={e.symbol} size="sm" /> {e.symbol}
+                    <AssetLogo symbol={e.symbol} size="sm" /> {e.symbol}
                   </span>
                   <StatusBadge status={e.status} />
                 </div>

@@ -7,7 +7,7 @@ import { useWallet } from '../hooks/useWallet.jsx'
 import { formatGwei, formatNumber, formatTokenAmount, formatWeiToNative, shortHash } from '../utils/formatters.js'
 import { Skeleton } from './LoadingState.jsx'
 import Modal from './Modal.jsx'
-import { AssetMonogram } from './RewardCard.jsx'
+import AssetLogo from './AssetLogo.jsx'
 
 const BUSY_STEPS = new Set(['estimating', 'preparing', 'awaiting_wallet', 'submitted', 'confirming'])
 const LOCKED_STEPS = new Set(['preparing', 'awaiting_wallet', 'submitted', 'confirming'])
@@ -23,7 +23,7 @@ export function ClaimRow({ symbol, name, amount, decimals, claimableUsd, emphasi
   return (
     <div className="flex items-center justify-between gap-4 py-3">
       <div className="flex min-w-0 items-center gap-3">
-        <AssetMonogram symbol={symbol} size="sm" />
+        <AssetLogo symbol={symbol} size="sm" />
         <div className="min-w-0">
           <p className={`font-semibold text-fg ${emphasis ? 'text-base' : 'text-sm'}`}>{symbol}</p>
           {name && <p className="truncate text-xs text-muted">{name}</p>}

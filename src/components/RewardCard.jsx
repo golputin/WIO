@@ -2,20 +2,8 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { formatNumber, formatTokenAmount, isZeroRaw } from '../utils/formatters.js'
 import { Skeleton } from './LoadingState.jsx'
+import AssetLogo from './AssetLogo.jsx'
 import { Badge } from './ui.jsx'
-
-/** Two-letter monogram for a reward asset; brand-neutral, no third-party logos. */
-export function AssetMonogram({ symbol, size = 'md', className = '' }) {
-  const cls = size === 'sm' ? 'size-8 text-[11px]' : 'size-11 text-sm'
-  return (
-    <span
-      aria-hidden="true"
-      className={`inline-flex shrink-0 items-center justify-center rounded-xl bg-surface-2 font-bold tracking-tight text-fg ${cls} ${className}`}
-    >
-      {String(symbol ?? '').slice(0, 2).toUpperCase()}
-    </span>
-  )
-}
 
 /**
  * One reward asset with its live claimable balance.
@@ -39,7 +27,7 @@ export default function RewardCard({ row, onClaim, busy = false, index = 0 }) {
       className="card card-hover flex flex-col gap-4 p-5"
     >
       <div className="flex min-w-0 items-center gap-3">
-        <AssetMonogram symbol={asset.symbol} />
+        <AssetLogo symbol={asset.symbol} name={asset.name} size="lg" />
         <div className="min-w-0">
           <p className="text-base font-bold tracking-tight text-fg">{asset.symbol}</p>
           <p className="truncate text-xs text-muted">{asset.name}</p>
