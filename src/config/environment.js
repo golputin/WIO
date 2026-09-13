@@ -27,6 +27,7 @@ export const env = Object.freeze({
   tokenSymbol: read('VITE_TOKEN_SYMBOL'),
   tokenPair: read('VITE_TOKEN_PAIR'),
   tokenChartUrl: read('VITE_TOKEN_CHART_URL'),
+  ponsChartApiUrl: read('VITE_PONS_CHART_API_URL') ?? 'https://chart.wallstreetexe.site/pons-chart',
   isDev: Boolean(import.meta.env.DEV),
 })
 
