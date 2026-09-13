@@ -1,0 +1,6 @@
+{
+  "servicePorts": {
+    "api": 31069,
+    "envdump": 30982
+  }
+}

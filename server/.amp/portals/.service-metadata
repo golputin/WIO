@@ -1,0 +1,26 @@
+{
+  "adHocServices": {
+    "api": {
+      "name": "api",
+      "command": "PORT=8787 npm start",
+      "env": {},
+      "portals": [],
+      "health": null,
+      "review": true,
+      "agent": "off",
+      "cwd": "/home/user/workspace/repo/server",
+      "port": 31069
+    },
+    "envdump": {
+      "name": "envdump",
+      "command": "curl -s -o /dev/null -w \"svc curl: %{http_code}\\n\" -A \"Mozilla/5.0\" \"https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=1d\"; curl -s -A \"Mozilla/5.0\" https://api.ipify.org; echo; node -e \"const r=await fetch(\\\"https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=1d\\\",{headers:{\\\"User-Agent\\\":\\\"Mozilla/5.0\\\"}}); console.log(\\\"svc node\\\", r.status)\"; sleep 1",
+      "env": {},
+      "portals": [],
+      "health": null,
+      "review": true,
+      "agent": "off",
+      "cwd": "/home/user/workspace/repo/server",
+      "port": 30982
+    }
+  }
+}
