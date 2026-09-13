@@ -1,7 +1,8 @@
 import { Radio } from 'lucide-react'
 import { useIndices } from '../hooks/useMarketData.js'
 import { changeTone, formatNumber, formatPercent } from '../utils/formatters.js'
-import { Skeleton } from './LoadingState.jsx'
+import AssetLogo from './AssetLogo.jsx'
+import { LensLoader, Skeleton } from './LoadingState.jsx'
 
 /**
  * Horizontal index ticker. Values come from `marketApi.getIndices`. On mobile the strip scrolls
@@ -20,7 +21,8 @@ export default function MarketTicker() {
         <div className="relative min-w-0 flex-1 overflow-hidden">
           {state === 'loading' && (
             <div className="flex items-center gap-8" aria-busy="true">
-              {[0, 1, 2, 3].map((i) => (
+              <LensLoader label="Reading the market..." />
+              {[0, 1, 2].map((i) => (
                 <span key={i} className="flex items-center gap-2">
                   <Skeleton className="h-3.5 w-16" />
                   <Skeleton className="h-3.5 w-14" />
@@ -60,6 +62,7 @@ function TickerItem({ item, ariaHidden = false, className = '' }) {
   const color = tone === 'positive' ? 'text-green' : tone === 'negative' ? 'text-red' : 'text-muted'
   return (
     <li className={`flex items-center gap-2.5 text-sm whitespace-nowrap ${className}`} aria-hidden={ariaHidden || undefined}>
+      <AssetLogo symbol={item.symbol} name={item.name} size="xs" />
       <span className="font-semibold text-fg">{item.name ?? item.symbol}</span>
       <span className="tabular text-fg-2">{formatNumber(item.value)}</span>
       <span className={`tabular font-semibold ${color}`}>{formatPercent(item.changePercent)}</span>

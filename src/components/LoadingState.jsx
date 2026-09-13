@@ -1,6 +1,26 @@
+import { MarketLensMark } from './MarketLensLogo.jsx'
+
 /**
  * Skeleton loaders. Shapes only — never numbers.
+ * Loading copy uses the lens vocabulary; pick one via `lensPhrase(seed)`.
  */
+export const LENS_PHRASES = Object.freeze(['Adjusting the lens...', 'Reading the market...', 'Finding the signal...', 'Bringing prices into focus...'])
+
+export function lensPhrase(seed = '') {
+  let h = 0
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) % LENS_PHRASES.length
+  return LENS_PHRASES[h]
+}
+
+/** Small animated spectacles + phrase. For inline "thinking" moments (search, analysis). */
+export function LensLoader({ label, seed = '', className = '' }) {
+  return (
+    <div role="status" aria-live="polite" className={`flex items-center gap-2.5 text-xs font-medium text-muted ${className}`}>
+      <MarketLensMark size={22} className="animate-lens" id={`ld-${seed || 'x'}`} />
+      <span>{label ?? lensPhrase(seed)}</span>
+    </div>
+  )
+}
 export function Skeleton({ className = '', style }) {
   return <span aria-hidden="true" style={style} className={`skeleton block ${className}`} />
 }
@@ -31,10 +51,10 @@ export function SkeletonRow({ cols = 4 }) {
   )
 }
 
-export default function LoadingState({ label = 'Loading live data...', rows = 3, className = '' }) {
+export default function LoadingState({ label, rows = 3, className = '' }) {
   return (
     <div role="status" aria-live="polite" className={`px-1 ${className}`}>
-      <p className="mb-2 text-xs font-medium text-muted">{label}</p>
+      <LensLoader label={label} seed={String(rows)} className="mb-2" />
       <div className="divide-y divide-border">
         {Array.from({ length: rows }).map((_, i) => (
           <SkeletonRow key={i} />

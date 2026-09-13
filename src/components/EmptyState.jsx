@@ -1,4 +1,5 @@
 import { AlertCircle, Plug, RefreshCw, WifiOff } from 'lucide-react'
+import { MarketLensMark } from './MarketLensLogo.jsx'
 
 const ICONS = {
   config: Plug,
@@ -20,6 +21,7 @@ export default function EmptyState({
   className = '',
 }) {
   const Icon = typeof icon === 'string' ? ICONS[icon] ?? Plug : icon
+  const lens = icon === 'lens'
   return (
     <div
       role="status"
@@ -28,7 +30,7 @@ export default function EmptyState({
       <span
         className={`inline-flex items-center justify-center rounded-full bg-surface-2 text-gold ${compact ? 'size-9' : 'size-12'}`}
       >
-        <Icon className={compact ? 'size-4' : 'size-5'} strokeWidth={1.75} />
+        {lens ? <MarketLensMark size={compact ? 22 : 30} variant="mono" id={`es-${title}`} /> : <Icon className={compact ? 'size-4' : 'size-5'} strokeWidth={1.75} />}
       </span>
       <div>
         <p className={`font-semibold text-fg ${compact ? 'text-sm' : 'text-base'}`}>{title}</p>

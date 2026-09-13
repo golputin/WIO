@@ -65,7 +65,7 @@ export default function RewardHistory({ className = '' }) {
       ) : !wallet.isConnected ? (
         <EmptyState icon={Wallet} title="Connect your wallet to view your history." action={<WalletConnect size="sm" />} />
       ) : history.state === 'loading' ? (
-        <LoadingState label="Loading reward history..." rows={4} className="p-5 sm:p-6" />
+        <LoadingState label="Reading reward history..." rows={4} className="p-5 sm:p-6" />
       ) : history.state === 'unavailable' ? (
         <EmptyState
           icon={history.error?.reason === 'network' ? 'network' : 'error'}

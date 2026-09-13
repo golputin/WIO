@@ -2,6 +2,7 @@ import { ExternalLink, Newspaper } from 'lucide-react'
 import { providers } from '../config/environment.js'
 import { useNews } from '../hooks/useMarketData.js'
 import { formatRelative } from '../utils/formatters.js'
+import AssetLogo from './AssetLogo.jsx'
 import EmptyState from './EmptyState.jsx'
 import { SkeletonText } from './LoadingState.jsx'
 
@@ -13,7 +14,7 @@ export default function NewsList({ symbol, limit = 8, title = 'Latest news', cla
   return (
     <section aria-labelledby="news-heading" className={`card overflow-hidden ${className}`}>
       <header className="flex items-center gap-2 border-b border-border px-5 py-4">
-        <Newspaper className="size-4 text-gold" />
+        {symbol ? <AssetLogo symbol={symbol} size="xs" /> : <Newspaper className="size-4 text-gold" />}
         <h2 id="news-heading" className="text-sm font-bold tracking-tight text-fg">
           {title}
           {symbol && <span className="ml-1.5 font-semibold text-muted">· {symbol}</span>}
@@ -36,7 +37,7 @@ export default function NewsList({ symbol, limit = 8, title = 'Latest news', cla
           onRetry={news.error?.retryable ? news.refresh : undefined}
         />
       ) : items.length === 0 ? (
-        <EmptyState compact icon={Newspaper} title="No recent headlines." description="Nothing verified has been published for this asset yet." />
+        <EmptyState compact icon="lens" title="Quiet on the wire." description="Nothing verified has been published for this asset yet." />
       ) : (
         <ul className="divide-y divide-border">
           {items.map((n) => (

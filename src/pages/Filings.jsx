@@ -1,5 +1,6 @@
 import { ExternalLink, FileText, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import AssetLogo from '../components/AssetLogo.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import FilingIntelligence from '../components/FilingIntelligence.jsx'
 import { SkeletonText } from '../components/LoadingState.jsx'
@@ -87,7 +88,8 @@ function FilingFeed({ res, symbol, onSelect }) {
       ) : (
         <ul className="divide-y divide-border">
           {items.map((f) => (
-            <li key={f.id ?? `${f.symbol}-${f.filedAt}`} className="flex items-center gap-3 px-5 py-3.5 text-sm">
+            <li key={f.id ?? `${f.symbol}-${f.filedAt}`} className="flex items-center gap-3 px-5 py-3.5 text-sm transition hover:bg-bg">
+              <AssetLogo symbol={f.symbol} name={f.company} size="sm" />
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <button

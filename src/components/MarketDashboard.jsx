@@ -3,6 +3,7 @@ import { Activity, CalendarDays, Radio } from 'lucide-react'
 import { providers } from '../config/environment.js'
 import { useChart, useEarnings, useMovementAnalysis, useMovers, useQuote } from '../hooks/useMarketData.js'
 import { changeTone, formatChange, formatCompact, formatDate, formatPrice, formatRelative } from '../utils/formatters.js'
+import AssetLogo from './AssetLogo.jsx'
 import { Skeleton } from './LoadingState.jsx'
 import StockChart from './StockChart.jsx'
 import { Badge, ChangeText } from './ui.jsx'
@@ -66,13 +67,16 @@ export default function MarketDashboard({ symbol: symbolProp, floating = true })
                     <Skeleton className="mt-2 h-3.5 w-40" />
                   </>
                 ) : q ? (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl font-bold tracking-tight text-fg">{q.symbol}</span>
-                      {q.exchange && <Badge tone="muted">{q.exchange}</Badge>}
+                  <div className="flex items-center gap-3">
+                    <AssetLogo symbol={q.symbol} name={q.name} size="md" />
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-bold tracking-tight text-fg">{q.symbol}</span>
+                        {q.exchange && <Badge tone="muted">{q.exchange}</Badge>}
+                      </div>
+                      <p className="mt-0.5 truncate text-sm text-muted">{q.name}</p>
                     </div>
-                    <p className="mt-0.5 truncate text-sm text-muted">{q.name}</p>
-                  </>
+                  </div>
                 ) : (
                   <p className="text-sm text-muted">Quote unavailable</p>
                 )}

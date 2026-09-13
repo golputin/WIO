@@ -3,8 +3,9 @@ import { Activity, ExternalLink, FileText, Newspaper, Radar, ShieldCheck } from 
 import { providers } from '../config/environment.js'
 import { useMovementAnalysis, useQuote } from '../hooks/useMarketData.js'
 import { changeTone, formatChange, formatPrice, formatRelative } from '../utils/formatters.js'
+import AssetLogo from './AssetLogo.jsx'
 import EmptyState from './EmptyState.jsx'
-import { Skeleton, SkeletonText } from './LoadingState.jsx'
+import { LensLoader, Skeleton, SkeletonText } from './LoadingState.jsx'
 import SymbolPicker from './SymbolPicker.jsx'
 import { Badge, ChangeText, SourceList } from './ui.jsx'
 
@@ -34,13 +35,16 @@ export default function WhyMoving({ symbol, onChangeSymbol, embedded = false }) 
               <Skeleton className="mt-2 h-4 w-48" />
             </>
           ) : q ? (
-            <>
-              <div className="flex items-center gap-2.5">
-                <h3 className="text-2xl font-bold tracking-tight text-fg">{q.symbol}</h3>
-                {q.exchange && <Badge tone="muted">{q.exchange}</Badge>}
+            <div className="flex items-center gap-3">
+              <AssetLogo symbol={q.symbol} name={q.name} size="lg" />
+              <div className="min-w-0">
+                <div className="flex items-center gap-2.5">
+                  <h3 className="text-2xl font-bold tracking-tight text-fg">{q.symbol}</h3>
+                  {q.exchange && <Badge tone="muted">{q.exchange}</Badge>}
+                </div>
+                <p className="mt-0.5 truncate text-sm text-muted">{q.name}</p>
               </div>
-              <p className="mt-0.5 truncate text-sm text-muted">{q.name}</p>
-            </>
+            </div>
           ) : (
             <>
               <h3 className="text-2xl font-bold tracking-tight text-fg">{symbol}</h3>
@@ -87,7 +91,8 @@ export default function WhyMoving({ symbol, onChangeSymbol, embedded = false }) 
               />
             ) : analysis.state === 'loading' ? (
               <ol className="space-y-4" aria-busy="true">
-                {[0, 1, 2].map((i) => (
+                <LensLoader label="Finding the signal..." />
+                {[0, 1].map((i) => (
                   <li key={i} className="flex gap-4">
                     <Skeleton className="h-5 w-7" />
                     <SkeletonText lines={2} className="flex-1" />
@@ -142,7 +147,7 @@ export default function WhyMoving({ symbol, onChangeSymbol, embedded = false }) 
               <div className="rounded-xl border border-dashed border-border bg-bg p-5 text-center">
                 <ShieldCheck className="mx-auto size-5 text-gold" strokeWidth={1.75} />
                 <p className="mt-2 text-sm font-semibold text-fg">No verified catalyst detected yet.</p>
-                <p className="mt-1 text-sm text-muted">MarketLens is continuing to monitor available sources.</p>
+                <p className="mt-1 text-sm text-muted">The lens stays on it — we keep watching every connected source.</p>
               </div>
             )}
           </div>

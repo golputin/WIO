@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <MarketLensLogo height={28} />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">Understand the Market. Earn the Market.</p>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">See the Market Different. Real data, deeper intelligence, on-chain opportunities.</p>
             <a
               href={env.xUrl}
               target="_blank"

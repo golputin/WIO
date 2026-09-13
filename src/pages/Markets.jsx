@@ -1,5 +1,6 @@
 import { Bookmark, BookmarkCheck } from 'lucide-react'
 import { Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import AssetLogo from '../components/AssetLogo.jsx'
 import FilingIntelligence from '../components/FilingIntelligence.jsx'
 import MarketDashboard from '../components/MarketDashboard.jsx'
 import MarketTicker from '../components/MarketTicker.jsx'
@@ -38,7 +39,15 @@ export default function MarketsPage() {
           <SectionHeader as="h1"
             align="left"
             eyebrow="Markets"
-            title={symbol ? `${symbol} at a glance.` : 'Live market intelligence.'}
+            title={
+              symbol ? (
+                <span className="inline-flex items-center gap-3">
+                  <AssetLogo symbol={symbol} size="lg" className="translate-y-0.5" /> {symbol} at a glance.
+                </span>
+              ) : (
+                'Live market intelligence.'
+              )
+            }
             subtitle="Price, chart, verified catalysts, latest filing and headlines — all from connected live providers."
           />
           <div className="flex items-center gap-2">

@@ -6,8 +6,9 @@ import { providers } from '../config/environment.js'
 import { useAssetSearch } from '../hooks/useMarketData.js'
 import { useDebounce } from '../hooks/useDebounce.js'
 import { marketPath } from '../utils/routes.js'
+import AssetLogo from './AssetLogo.jsx'
 import EmptyState from './EmptyState.jsx'
-import { Skeleton } from './LoadingState.jsx'
+import { LensLoader, Skeleton } from './LoadingState.jsx'
 
 /**
  * Global asset search. Results come from the market provider; without one we say so.
@@ -88,10 +89,11 @@ export default function SearchDialog({ open, onClose, onSelect, placeholder = 'S
                   description="Asset search requires a live market data connection."
                 />
               ) : debounced.trim() === '' ? (
-                <p className="px-3 py-6 text-center text-sm text-muted">Type a ticker or company name to search live markets.</p>
+                <p className="px-3 py-6 text-center text-sm text-muted">Type a ticker or company name — we’ll bring it into focus.</p>
               ) : state === 'loading' ? (
                 <div className="space-y-2 p-2" aria-busy="true">
-                  {[0, 1, 2].map((i) => (
+                  <LensLoader label="Finding the signal..." className="px-1 pb-1" />
+                  {[0, 1].map((i) => (
                     <div key={i} className="flex items-center gap-3 py-2">
                       <Skeleton className="h-8 w-14" />
                       <Skeleton className="h-3.5 w-48" />
@@ -113,10 +115,11 @@ export default function SearchDialog({ open, onClose, onSelect, placeholder = 'S
                         onClick={() => select(r.symbol)}
                         className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-surface-2"
                       >
-                        <span className="inline-flex min-w-14 items-center justify-center rounded-lg bg-surface-2 px-2 py-1.5 font-mono text-xs font-semibold text-fg group-hover:bg-surface">
-                          {r.symbol}
+                        <AssetLogo symbol={r.symbol} name={r.name} size="sm" />
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-sm font-semibold text-fg group-hover:text-gold">{r.symbol}</span>
+                          <span className="block truncate text-xs text-muted">{r.name}</span>
                         </span>
-                        <span className="flex-1 truncate text-sm text-fg">{r.name}</span>
                         {r.exchange && <span className="hidden text-xs text-muted sm:block">{r.exchange}</span>}
                         <ArrowRight className="size-4 text-muted opacity-0 transition group-hover:opacity-100" />
                       </button>

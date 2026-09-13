@@ -70,7 +70,7 @@ export default function Navbar() {
         >
           <div className="flex min-w-0 items-center gap-6">
             <Link to="/" className="shrink-0 rounded-md" aria-label="MarketLens Capital home">
-              <MarketLensLogo height={26} />
+              <MarketLensLogo height={28} />
             </Link>
             <MarketStatusPill className="hidden lg:inline-flex" />
           </div>

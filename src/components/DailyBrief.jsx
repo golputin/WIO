@@ -2,6 +2,7 @@ import { CalendarDays, ExternalLink, Newspaper } from 'lucide-react'
 import { providers } from '../config/environment.js'
 import { useDailyBrief } from '../hooks/useMarketData.js'
 import { formatDate, formatPrice, todayLabel } from '../utils/formatters.js'
+import AssetLogo from './AssetLogo.jsx'
 import EmptyState from './EmptyState.jsx'
 import { SkeletonText } from './LoadingState.jsx'
 import { ChangeText, SourceList } from './ui.jsx'
@@ -49,8 +50,10 @@ export default function DailyBrief() {
             ) : b?.topMovers?.length ? (
               <ul className="space-y-2.5">
                 {b.topMovers.map((m) => (
-                  <li key={m.symbol} className="flex items-center justify-between text-sm">
-                    <span className="font-semibold text-fg">{m.symbol}</span>
+                  <li key={m.symbol} className="flex items-center justify-between gap-3 text-sm">
+                    <span className="flex items-center gap-2 font-semibold text-fg">
+                      <AssetLogo symbol={m.symbol} name={m.name} size="xs" /> {m.symbol}
+                    </span>
                     <span className="tabular flex items-center gap-3">
                       <span className="text-fg-2">{formatPrice(m.price, m.currency)}</span>
                       <ChangeText value={m.changePercent} />

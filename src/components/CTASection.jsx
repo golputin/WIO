@@ -13,7 +13,7 @@ export default function CTASection() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                'radial-gradient(60% 80% at 80% 10%, rgba(22,119,255,0.35), transparent 60%), radial-gradient(50% 60% at 10% 100%, rgba(22,119,255,0.18), transparent 60%)',
+                'radial-gradient(60% 80% at 80% 10%, rgba(201,169,97,0.22), transparent 60%), radial-gradient(50% 60% at 10% 100%, rgba(201,169,97,0.1), transparent 60%)',
             }}
           />
           <div
@@ -29,10 +29,10 @@ export default function CTASection() {
 
           <div className="relative mx-auto max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl lg:leading-[1.08]">
-              See the market differently.
+              See the Market Different.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">
-              Market intelligence and on-chain rewards, built into one platform.
+              Real-time market data, deeper intelligence, and on-chain opportunities — through a smarter lens.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link to="/markets" className="btn-primary">
@@ -42,7 +42,7 @@ export default function CTASection() {
                 to="/rewards"
                 className="btn border border-white/15 bg-surface/5 text-white hover:border-white/30 hover:bg-surface/10"
               >
-                <Gift className="size-4" strokeWidth={2} /> View Rewards
+                <Gift className="size-4" strokeWidth={2} /> View Rewards (read-only)
               </Link>
             </div>
           </div>

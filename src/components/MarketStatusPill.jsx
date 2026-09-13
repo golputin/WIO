@@ -40,7 +40,7 @@ export default function MarketStatusPill({ className = '' }) {
         {open && <span className="absolute inline-flex size-full animate-ping rounded-full bg-green opacity-60" />}
         <span className={`relative inline-flex size-1.5 rounded-full ${open ? 'bg-green' : 'bg-dim'}`} />
       </span>
-      <span className="tracking-wide uppercase">{label}</span>
+      <span className="tracking-wide whitespace-nowrap uppercase">{label}</span>
       {detail && <span className="hidden text-muted xl:inline">· {detail}</span>}
     </div>
   )

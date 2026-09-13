@@ -25,8 +25,8 @@ export function QuoteRow({ q, onRemove, showVolume = true }) {
   const changeCls = tone === 'positive' ? 'text-green' : tone === 'negative' ? 'text-red' : 'text-muted'
   const price = formatPrice(q.price, q.currency)
   return (
-    <li className="group flex items-center gap-3 py-3 sm:gap-4">
-      <AssetLogo symbol={q.symbol} size="sm" />
+    <li className="group row-hover -mx-2 flex items-center gap-3 rounded-lg px-2 py-3 sm:gap-4">
+      <AssetLogo symbol={q.symbol} name={q.name} size="sm" className="transition-transform duration-300 group-hover:scale-105" />
       <div className="min-w-0 flex-1">
         <Link to={marketPath(q.symbol)} className="font-semibold text-fg hover:text-gold">
           {q.symbol}
@@ -51,7 +51,7 @@ export function QuoteRow({ q, onRemove, showVolume = true }) {
         aria-label={`Open analysis for ${q.symbol}`}
         className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-surface-2 hover:text-gold"
       >
-        <ArrowUpRight className="size-4" />
+        <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </Link>
       {onRemove && (
         <button

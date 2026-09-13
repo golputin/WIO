@@ -147,7 +147,7 @@ export default function SmartAlerts() {
               description="Alerts you create will be stored and evaluated by the alert backend once it is connected."
             />
           ) : list.state === 'loading' ? (
-            <LoadingState label="Loading alerts..." rows={3} />
+            <LoadingState label="Focusing on your alerts..." rows={3} />
           ) : list.state === 'unavailable' ? (
             <EmptyState icon="error" title="Unable to load alerts." description={list.error?.message} onRetry={list.refresh} />
           ) : rules.length === 0 ? (

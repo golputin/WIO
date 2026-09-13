@@ -1,79 +1,94 @@
 /**
- * MarketLens Capital brand mark.
+ * MarketLens Capital brand mark — MARKET + LENS.
  *
- * Concept: a geometric "M" built from two market pillars. The left pillar and the descending
- * stroke form the classic letter; the right stroke breaks out above the cap height and resolves
- * into a single champagne focal point — the lens. The right pillar is set back in tone so the
- * breakout line reads first. Legible at 16px; balanced in a rounded square for app icons.
+ * A flat pair of round spectacles. Each lens holds a small candlestick series, so the mark reads
+ * as "see the market through a different lens" at a glance. 2D, single stroke weight, champagne
+ * frames on navy. Legible at 16px; balanced in a rounded square for app icons.
  *
- * Geometry lives in `MARK_PATHS` so the static SVGs in /public/brand stay in sync.
+ * Geometry lives in `LOGO_GEOMETRY` so the static SVGs in /public (favicon, brand, social) stay
+ * in sync — see scripts/brand.mjs.
  */
 
-export const MARK_PATHS = Object.freeze({
-  leftPillar: 'M7 25.5V8.5',
-  descend: 'M7 8.5L16 19.5',
-  breakout: 'M16 19.5L25.6 7.4',
-  rightPillar: 'M25 25.5V14.5',
-  lens: { cx: 25.6, cy: 7.4, r: 2.3 },
-})
+import { LOGO_GEOMETRY, LOGO_TONES } from '../config/brand.js'
 
-const TONES = {
-  dark: { primary: '#F4F6FA', secondary: 'rgba(244,246,250,0.42)', accent: '#C9A961', word: '#F4F6FA', sub: '#C9A961' },
-  light: { primary: '#0B0F17', secondary: 'rgba(11,15,23,0.4)', accent: '#9B7E3E', word: '#0B0F17', sub: '#9B7E3E' },
-  mono: { primary: 'currentColor', secondary: 'currentColor', accent: 'currentColor', word: 'currentColor', sub: 'currentColor' },
+export { LOGO_GEOMETRY, LOGO_TONES }
+
+function Candle({ c, t, sw }) {
+  const [x, wt, wb, bt, bb, up] = c
+  const color = up ? t.up : t.down
+  return (
+    <>
+      <line x1={x} y1={wt} x2={x} y2={wb} stroke={color} strokeWidth={sw * 0.5} strokeLinecap="round" />
+      <rect x={x - sw * 0.9} y={bt} width={sw * 1.8} height={bb - bt} rx={sw * 0.35} fill={color} />
+    </>
+  )
 }
 
-export function MarketLensMark({ size = 32, variant = 'dark', framed = false, className = '', title = 'MarketLens Capital' }) {
-  const t = TONES[variant] ?? TONES.dark
-  const stroke = 2.6
+export function MarketLensMark({ size = 32, variant = 'dark', framed = false, className = '', title = 'MarketLens Capital', id = 'ml' }) {
+  const t = LOGO_TONES[variant] ?? LOGO_TONES.dark
+  const g = LOGO_GEOMETRY
+  const sw = 3
+  const clipL = `${id}-lens-l`
+  const clipR = `${id}-lens-r`
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label={title}
-      className={className}
-    >
+    <svg width={size} height={size} viewBox={g.viewBox} fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={title} className={className}>
+      <defs>
+        <clipPath id={clipL}>
+          <circle cx={g.left.cx} cy={g.left.cy} r={g.left.r - sw / 2} />
+        </clipPath>
+        <clipPath id={clipR}>
+          <circle cx={g.right.cx} cy={g.right.cy} r={g.right.r - sw / 2} />
+        </clipPath>
+      </defs>
       {framed && (
         <>
-          <rect width="32" height="32" rx="7.5" fill="#0B0F17" />
-          <rect x="0.5" y="0.5" width="31" height="31" rx="7" stroke="rgba(255,255,255,0.08)" />
+          <rect width="64" height="64" rx="15" fill="#0B0F17" />
+          <rect x="0.5" y="0.5" width="63" height="63" rx="14.5" stroke="rgba(255,255,255,0.08)" />
         </>
       )}
-      <path d={MARK_PATHS.leftPillar} stroke={t.primary} strokeWidth={stroke} strokeLinecap="round" />
-      <path d={MARK_PATHS.descend} stroke={t.primary} strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round" />
-      <path d={MARK_PATHS.rightPillar} stroke={t.secondary} strokeWidth={stroke} strokeLinecap="round" />
-      <path d={MARK_PATHS.breakout} stroke={t.accent} strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx={MARK_PATHS.lens.cx} cy={MARK_PATHS.lens.cy} r={MARK_PATHS.lens.r} fill={t.accent} />
+      {/* glass */}
+      <circle cx={g.left.cx} cy={g.left.cy} r={g.left.r} fill={t.glass} />
+      <circle cx={g.right.cx} cy={g.right.cy} r={g.right.r} fill={t.glass} />
+      {/* candles inside lenses */}
+      <g clipPath={`url(#${clipL})`}>
+        {g.leftCandles.map((c) => (
+          <Candle key={c[0]} c={c} t={t} sw={sw} />
+        ))}
+      </g>
+      <g clipPath={`url(#${clipR})`}>
+        {g.rightCandles.map((c) => (
+          <Candle key={c[0]} c={c} t={t} sw={sw} />
+        ))}
+      </g>
+      {/* frames */}
+      <circle cx={g.left.cx} cy={g.left.cy} r={g.left.r} stroke={t.frame} strokeWidth={sw} />
+      <circle cx={g.right.cx} cy={g.right.cy} r={g.right.r} stroke={t.frame} strokeWidth={sw} />
+      <path d={g.bridge} stroke={t.frame} strokeWidth={sw} strokeLinecap="round" />
+      <path d={g.templeL} stroke={t.frame} strokeWidth={sw} strokeLinecap="round" />
+      <path d={g.templeR} stroke={t.frame} strokeWidth={sw} strokeLinecap="round" />
+      {/* glint */}
+      <path d={`M${g.left.cx - 7} ${g.left.cy - 6.5}a9 9 0 0 1 5.5-3`} stroke={t.glassEdge} strokeWidth={sw * 0.5} strokeLinecap="round" />
+      <path d={`M${g.right.cx - 7} ${g.right.cy - 6.5}a9 9 0 0 1 5.5-3`} stroke={t.glassEdge} strokeWidth={sw * 0.5} strokeLinecap="round" />
     </svg>
   )
 }
 
 /**
- * Lockup: mark + two-line wordmark. `height` is the mark size; type scales with it.
+ * Lockup: mark + wordmark. `height` is the mark size; type scales with it.
  * `compact` renders a single-line "MARKETLENS" for tight spaces.
  */
 export function MarketLensLogo({ height = 28, variant = 'dark', className = '', showWordmark = true, compact = false }) {
-  const t = TONES[variant] ?? TONES.dark
+  const t = LOGO_TONES[variant] ?? LOGO_TONES.dark
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`} aria-label="MarketLens Capital">
-      <MarketLensMark size={height} variant={variant} />
+      <MarketLensMark size={height * 1.15} variant={variant} id={`ml-${height}`} />
       {showWordmark && (
         <span className="flex flex-col justify-center leading-none select-none">
-          <span
-            className="font-bold tracking-[0.16em]"
-            style={{ color: t.word, fontSize: compact ? height * 0.46 : height * 0.44, lineHeight: 1 }}
-          >
+          <span className="font-bold tracking-[0.14em]" style={{ color: t.word, fontSize: compact ? height * 0.46 : height * 0.44, lineHeight: 1 }}>
             MARKETLENS
           </span>
           {!compact && (
-            <span
-              className="mt-[0.28em] font-semibold tracking-[0.34em]"
-              style={{ color: t.sub, fontSize: height * 0.3, lineHeight: 1 }}
-            >
+            <span className="mt-[0.28em] font-semibold tracking-[0.34em]" style={{ color: t.sub, fontSize: height * 0.3, lineHeight: 1 }}>
               CAPITAL
             </span>
           )}

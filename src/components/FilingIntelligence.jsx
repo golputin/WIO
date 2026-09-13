@@ -2,8 +2,9 @@ import { AlertTriangle, ExternalLink, FileText, Sparkles, TrendingUp } from 'luc
 import { providers } from '../config/environment.js'
 import { useLatestFilingAnalysis } from '../hooks/useMarketData.js'
 import { formatDate } from '../utils/formatters.js'
+import AssetLogo from './AssetLogo.jsx'
 import EmptyState from './EmptyState.jsx'
-import { Skeleton, SkeletonText } from './LoadingState.jsx'
+import { LensLoader, Skeleton, SkeletonText } from './LoadingState.jsx'
 import SymbolPicker from './SymbolPicker.jsx'
 import { Badge, SourceList } from './ui.jsx'
 
@@ -24,6 +25,7 @@ export default function FilingIntelligence({ symbol, onChangeSymbol }) {
             <Skeleton className="mt-2 h-7 w-56" />
           ) : a?.filing ? (
             <div className="mt-1 flex flex-wrap items-center gap-2.5">
+              <AssetLogo symbol={a.filing.symbol} name={a.filing.company} size="md" />
               <h3 className="text-2xl font-bold tracking-tight text-fg">{a.filing.company}</h3>
               <Badge tone="blue">{a.filing.formType}</Badge>
               {a.filing.filedAt && <span className="text-xs text-muted">Filed {formatDate(a.filing.filedAt)}</span>}
@@ -43,7 +45,7 @@ export default function FilingIntelligence({ symbol, onChangeSymbol }) {
       </div>
 
       {!symbol ? (
-        <EmptyState title="Select a company." description="Search for a ticker to analyse its latest filing." />
+        <EmptyState icon="lens" title="Select a company." description="Search for a ticker and we’ll read its latest filing." />
       ) : !providers.filings ? (
         <EmptyState
           title="Filing data provider is not configured."
@@ -106,7 +108,10 @@ export default function FilingIntelligence({ symbol, onChangeSymbol }) {
           {/* AI summary */}
           <Panel className="lg:col-span-4" icon={Sparkles} title="AI summary" accent>
             {res.state === 'loading' ? (
-              <SkeletonText lines={6} />
+              <>
+                <LensLoader label="Reading the filing..." className="mb-3" />
+                <SkeletonText lines={5} />
+              </>
             ) : a?.summary ? (
               <p className="text-sm leading-relaxed text-fg-2">{a.summary}</p>
             ) : (

@@ -4,6 +4,7 @@ import { providers } from '../config/environment.js'
 import { useEarnings, useMarketEvents, useMovers, useRecentFilings } from '../hooks/useMarketData.js'
 import { formatDate, formatDateTime } from '../utils/formatters.js'
 import { marketPath } from '../utils/routes.js'
+import AssetLogo from './AssetLogo.jsx'
 import EmptyState from './EmptyState.jsx'
 import { SkeletonText } from './LoadingState.jsx'
 import QuoteList, { QuoteListSkeleton } from './QuoteList.jsx'
@@ -89,8 +90,9 @@ function EarningsCard() {
     >
       <ul className="divide-y divide-border">
         {(res.data ?? []).slice(0, 8).map((e) => (
-          <li key={`${e.symbol}-${e.date}`} className="flex items-center justify-between gap-3 py-3 text-sm">
-            <div className="min-w-0">
+          <li key={`${e.symbol}-${e.date}`} className="flex items-center gap-3 py-3 text-sm">
+            <AssetLogo symbol={e.symbol} name={e.name} size="sm" />
+            <div className="min-w-0 flex-1">
               <Link to={marketPath(e.symbol)} className="font-semibold text-fg hover:text-gold">
                 {e.symbol}
               </Link>
@@ -122,8 +124,9 @@ function FilingsCard() {
     >
       <ul className="divide-y divide-border">
         {(res.data ?? []).slice(0, 8).map((f) => (
-          <li key={f.id ?? `${f.symbol}-${f.filedAt}`} className="flex items-center justify-between gap-3 py-3 text-sm">
-            <div className="min-w-0">
+          <li key={f.id ?? `${f.symbol}-${f.filedAt}`} className="flex items-center gap-3 py-3 text-sm">
+            <AssetLogo symbol={f.symbol} name={f.company} size="sm" />
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <Link to={marketPath(f.symbol)} className="font-semibold text-fg hover:text-gold">
                   {f.symbol}

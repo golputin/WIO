@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import MarketDashboard from './MarketDashboard.jsx'
 
 const HIGHLIGHTS = [
-  { icon: Radio, label: 'Real-time intelligence' },
-  { icon: Brain, label: 'AI-powered analysis' },
+  { icon: Radio, label: 'Live market data' },
+  { icon: Brain, label: 'AI market intelligence' },
   { icon: Link2, label: 'On-chain rewards' },
 ]
 
@@ -17,7 +17,7 @@ export default function Hero() {
       {/* Restrained backdrop */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-x-0 top-0 h-[640px] grid-fade" />
-        <div className="absolute top-[-120px] right-[-160px] size-[520px] rounded-full bg-cyan blur-3xl opacity-70" />
+        <div className="absolute top-[-160px] right-[-120px] size-[560px] rounded-full bg-gold/10 blur-3xl" />
         <div className="absolute top-[200px] left-[-200px] size-[420px] rounded-full bg-surface-2 blur-3xl opacity-80" />
       </div>
 
@@ -29,7 +29,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease }}
           >
-            Market intelligence. Real rewards.
+            Markets. Clarity. Opportunity.
           </motion.p>
 
           <motion.h1
@@ -38,9 +38,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05, ease }}
           >
-            Understand the Market.
+            See the Market
             <br />
-            <span className="text-gold">Earn the Market.</span>
+            <span className="text-gradient-gold">Different.</span>
           </motion.h1>
 
           <motion.p
@@ -49,7 +49,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.12, ease }}
           >
-            Real-time market intelligence, AI-powered analysis, smart alerts, and stock rewards — all in one platform.
+            Real-time market data, deeper intelligence, and on-chain opportunities — through a smarter lens.
           </motion.p>
 
           <motion.div
@@ -61,8 +61,8 @@ export default function Hero() {
             <Link to="/markets" className="btn-primary !px-6 !py-3 text-base">
               Explore Markets <ArrowRight className="size-4" />
             </Link>
-            <Link to="/rewards" className="btn-secondary !px-6 !py-3 text-base">
-              View Rewards
+            <Link to="/analytics" className="btn-secondary !px-6 !py-3 text-base">
+              Why is it moving?
             </Link>
           </motion.div>
 

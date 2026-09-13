@@ -1,0 +1,21 @@
+<svg width="300" height="64" viewBox="0 0 300 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MarketLens Capital">
+  <g>
+  <defs>
+    <clipPath id="lk-light-l"><circle cx="19" cy="37" r="11"/></clipPath>
+    <clipPath id="lk-light-r"><circle cx="45" cy="37" r="11"/></clipPath>
+  </defs>
+  
+  <circle cx="19" cy="37" r="12.5" fill="#0E1626"/>
+  <circle cx="45" cy="37" r="12.5" fill="#0E1626"/>
+  <g clip-path="url(#lk-light-l)"><line x1="13.5" y1="39" x2="13.5" y2="45" stroke="rgba(244,246,250,0.55)" stroke-width="1.5" stroke-linecap="round"/><rect x="10.8" y="40.5" width="5.4" height="3.5" rx="1.0499999999999998" fill="rgba(244,246,250,0.55)"/><line x1="19" y1="31.5" x2="19" y2="41" stroke="#E3CB8C" stroke-width="1.5" stroke-linecap="round"/><rect x="16.3" y="33.5" width="5.4" height="6" rx="1.0499999999999998" fill="#E3CB8C"/><line x1="24.5" y1="28" x2="24.5" y2="37" stroke="#E3CB8C" stroke-width="1.5" stroke-linecap="round"/><rect x="21.8" y="30" width="5.4" height="4.5" rx="1.0499999999999998" fill="#E3CB8C"/></g>
+  <g clip-path="url(#lk-light-r)"><line x1="39.5" y1="29" x2="39.5" y2="39" stroke="#E3CB8C" stroke-width="1.5" stroke-linecap="round"/><rect x="36.8" y="31" width="5.4" height="5.5" rx="1.0499999999999998" fill="#E3CB8C"/><line x1="45" y1="33" x2="45" y2="44" stroke="rgba(244,246,250,0.55)" stroke-width="1.5" stroke-linecap="round"/><rect x="42.3" y="35" width="5.4" height="6.5" rx="1.0499999999999998" fill="rgba(244,246,250,0.55)"/><line x1="50.5" y1="31.5" x2="50.5" y2="41" stroke="#E3CB8C" stroke-width="1.5" stroke-linecap="round"/><rect x="47.8" y="33" width="5.4" height="5.5" rx="1.0499999999999998" fill="#E3CB8C"/></g>
+  <circle cx="19" cy="37" r="12.5" stroke="#9B7E3E" stroke-width="3"/>
+  <circle cx="45" cy="37" r="12.5" stroke="#9B7E3E" stroke-width="3"/>
+  <path d="M31.2 34.2C31.6 31.2 32.4 31.2 32.8 34.2" stroke="#9B7E3E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M6.6 35.2L2.5 30.5" stroke="#9B7E3E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M57.4 35.2L61.5 30.5" stroke="#9B7E3E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M12 30.5a9 9 0 0 1 5.5-3" stroke="rgba(155,126,62,0.25)" stroke-width="1.5" stroke-linecap="round"/><path d="M38 30.5a9 9 0 0 1 5.5-3" stroke="rgba(155,126,62,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+  <text x="78" y="33" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-weight="700" font-size="24" letter-spacing="3.4" fill="#0B0F17">MARKETLENS</text>
+  <text x="78" y="52" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-weight="600" font-size="13" letter-spacing="4.4" fill="#9B7E3E">CAPITAL</text>
+</svg>

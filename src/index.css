@@ -103,11 +103,11 @@
 }
 
 @utility btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 bg-gold text-ink shadow-[0_8px_24px_-10px_rgba(201,169,97,0.6)] hover:bg-gold-300 active:bg-gold-700;
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 bg-gold text-ink shadow-[0_8px_24px_-10px_rgba(201,169,97,0.6)] hover:-translate-y-px hover:bg-gold-300 hover:shadow-[0_12px_32px_-10px_rgba(201,169,97,0.75)] active:translate-y-0 active:scale-[0.98] active:bg-gold-700;
 }
 
 @utility btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 border border-border-strong bg-surface-2/60 text-fg hover:border-gold/40 hover:bg-surface-3;
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 border border-border-strong bg-surface-2/60 text-fg hover:-translate-y-px hover:border-gold/40 hover:bg-surface-3 active:translate-y-0 active:scale-[0.98];
 }
 
 @utility btn-ghost {
@@ -176,6 +176,46 @@
   }
 }
 
+/* Spectacles "scanning" — used by LensLoader. */
+@keyframes lens-scan {
+  0%,
+  100% {
+    transform: rotate(-5deg) translateY(0);
+  }
+  50% {
+    transform: rotate(5deg) translateY(-1px);
+  }
+}
+
+.animate-lens {
+  animation: lens-scan 1.5s ease-in-out infinite;
+  transform-origin: 50% 58%;
+}
+
+/* Row hover for live lists: gentle lift, gold hairline on the left. */
+.row-hover {
+  position: relative;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.row-hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--color-gold);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.row-hover:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+.row-hover:hover::before {
+  opacity: 1;
+}
+
 @keyframes ticker {
   from {
     transform: translateX(0);
@@ -194,7 +234,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-ticker {
+  .animate-ticker,
+  .animate-lens {
     animation: none;
   }
 }
