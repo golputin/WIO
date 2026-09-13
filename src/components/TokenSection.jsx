@@ -15,13 +15,26 @@ function TokenChart() {
 
   useEffect(() => {
     if (!url) { setState('idle'); return undefined }
-    const controller = new AbortController()
-    setState('loading')
-    fetch(url, { signal: controller.signal })
-      .then((response) => { if (!response.ok) throw new Error(`Pons chart HTTP ${response.status}`); return response.json() })
-      .then((payload) => { const next = Array.isArray(payload?.points) ? payload.points : []; setPoints(next); setState(next.length ? 'ok' : 'empty') })
-      .catch((cause) => { if (cause.name !== 'AbortError') setState('unavailable') })
-    return () => controller.abort()
+    let cancelled = false
+    let firstLoad = true
+    const refresh = async () => {
+      try {
+        if (firstLoad) setState('loading')
+        const response = await fetch(`${url}&_=${Date.now()}`, { cache: 'no-store' })
+        if (!response.ok) throw new Error(`Pons chart HTTP ${response.status}`)
+        const payload = await response.json()
+        if (cancelled) return
+        const next = Array.isArray(payload?.points) ? payload.points : []
+        setPoints(next)
+        setState(next.length ? 'ok' : 'empty')
+        firstLoad = false
+      } catch (cause) {
+        if (!cancelled && cause.name !== 'AbortError') setState('unavailable')
+      }
+    }
+    refresh()
+    const timer = window.setInterval(refresh, 15_000)
+    return () => { cancelled = true; window.clearInterval(timer) }
   }, [url])
 
   const path = useMemo(() => {

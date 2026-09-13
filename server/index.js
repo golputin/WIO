@@ -20,6 +20,7 @@ import { analytics } from './routes/analytics.js'
 import { filings } from './routes/filings.js'
 import { market } from './routes/market.js'
 import { news } from './routes/news.js'
+import { pons } from './routes/pons.js'
 
 const PORT = Number(process.env.PORT) || 8787
 const ORIGINS = (process.env.CORS_ORIGINS ?? 'http://localhost:5173,http://127.0.0.1:5173').split(',').map((s) => s.trim()).filter(Boolean)
@@ -50,6 +51,7 @@ app.use('/rewards', rewards)
 app.use('/news', news)
 app.use('/filings', filings)
 app.use('/analytics', analytics)
+app.use('/pons-chart', pons)
 
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }))
 
