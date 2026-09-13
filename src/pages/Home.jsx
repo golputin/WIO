@@ -1,5 +1,11 @@
-import PageShell from './PageShell.jsx'
+import Hero from '../components/Hero.jsx'
+import MarketTicker from '../components/MarketTicker.jsx'
 
 export default function HomePage() {
-  return <PageShell eyebrow="MarketLens" title="Home" />
+  return (
+    <>
+      <Hero />
+      <MarketTicker />
+    </>
+  )
 }

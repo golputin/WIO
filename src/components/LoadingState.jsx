@@ -1,8 +1,8 @@
 /**
  * Skeleton loaders. Shapes only — never numbers.
  */
-export function Skeleton({ className = '' }) {
-  return <span aria-hidden="true" className={`skeleton block ${className}`} />
+export function Skeleton({ className = '', style }) {
+  return <span aria-hidden="true" style={style} className={`skeleton block ${className}`} />
 }
 
 export function SkeletonText({ lines = 3, className = '' }) {
