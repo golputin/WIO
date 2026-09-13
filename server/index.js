@@ -14,6 +14,7 @@ import { cacheSize } from './lib/cache.js'
 import * as finnhub from './providers/finnhub.js'
 import * as llm from './providers/llm.js'
 import * as sec from './providers/sec.js'
+import { alerts } from './routes/alerts.js'
 import { analytics } from './routes/analytics.js'
 import { filings } from './routes/filings.js'
 import { market } from './routes/market.js'
@@ -43,6 +44,7 @@ app.get('/health', (_req, res) => {
 })
 
 app.use('/market', market)
+app.use('/alerts', alerts)
 app.use('/news', news)
 app.use('/filings', filings)
 app.use('/analytics', analytics)
