@@ -102,6 +102,8 @@ export default function DailyBrief() {
                   </li>
                 ))}
               </ul>
+            ) : b?.earningsToday === null ? (
+              <Muted>Earnings calendar not connected.</Muted>
             ) : (
               <Muted>No earnings scheduled today.</Muted>
             )}

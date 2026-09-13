@@ -25,12 +25,11 @@ const fmt = (v) => v.toLocaleString('en-US', { maximumFractionDigits: 2 })
 
 /** Sentence built strictly from live index values. */
 function overviewFromIndices(indices) {
-  const parts = indices
-    .filter((ix) => ['SPX', 'NASDAQ', 'DOW'].includes(ix.symbol) && typeof ix.changePercent === 'number')
-    .map((ix) => `${ix.name} ${ix.changePercent >= 0 ? 'up' : 'down'} ${pct(ix.changePercent)} at ${fmt(ix.value)}`)
+  const majors = indices.filter((ix) => ['SPX', 'NASDAQ', 'DOW'].includes(ix.symbol) && typeof ix.changePercent === 'number')
+  const parts = majors.map((ix) => `${ix.name} ${ix.changePercent >= 0 ? 'up' : 'down'} ${pct(ix.changePercent)} at ${fmt(ix.value)}`)
   if (!parts.length) return null
-  const ups = indices.filter((ix) => ix.changePercent > 0).length
-  const tone = ups === indices.length ? 'Broad gains across major indices.' : ups === 0 ? 'Major indices trading lower.' : 'Mixed session across major indices.'
+  const ups = majors.filter((ix) => ix.changePercent > 0).length
+  const tone = ups === majors.length ? 'Broad gains across major indices.' : ups === 0 ? 'Major indices trading lower.' : 'Mixed session across major indices.'
   return `${tone} ${parts.join('; ')}.`
 }
 
@@ -43,7 +42,7 @@ news.get('/brief', route(async () => {
     yahoo.getIndices(),
     yahoo.getMovers('gainers', 6).catch(() => []),
     yahoo.getNews('', 6).catch(() => []),
-    finnhub.configured() ? finnhub.getEarnings('today').catch(() => []) : Promise.resolve([]),
+    finnhub.configured() ? finnhub.getEarnings('today').catch(() => []) : Promise.resolve(null),
   ])
   const asOf = indices[0]?.asOf ?? new Date().toISOString()
   const sources = [{ label: 'Yahoo Finance', url: 'https://finance.yahoo.com' }]
@@ -54,7 +53,7 @@ news.get('/brief', route(async () => {
     indices,
     topMovers: movers.slice(0, 5),
     whatMatters: headlines.slice(0, 5).map((n) => ({ title: n.headline, source: n.source, url: n.url })),
-    earningsToday: earningsToday.slice(0, 8),
+    earningsToday: earningsToday ? earningsToday.slice(0, 8) : null,
     upcomingEvents: [],
     sources,
     generatedAt: new Date().toISOString(),

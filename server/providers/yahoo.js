@@ -145,8 +145,11 @@ export async function getNews(symbol, limit = 10) {
   const q = symbol ? symbol : 'stock market'
   const url = `${Q1}/v1/finance/search?q=${encodeURIComponent(q)}&quotesCount=0&newsCount=${Math.min(limit, 20)}`
   const json = await fetchJsonCached(url, TTL.news, { provider: PROVIDER })
+  const sym = symbol ? String(symbol).toUpperCase() : null
   return (json?.news ?? [])
     .filter((n) => n.title && n.link)
+    // Yahoo search is fuzzy; for a symbol keep only stories Yahoo itself tagged with that ticker.
+    .filter((n) => !sym || (Array.isArray(n.relatedTickers) && n.relatedTickers.includes(sym)))
     .map((n) => ({
       id: n.uuid ?? n.link,
       headline: n.title,
