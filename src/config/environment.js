@@ -15,6 +15,7 @@ export const env = Object.freeze({
   filingsApiUrl: read('VITE_FILINGS_API_URL'),
   rewardsApiUrl: read('VITE_REWARDS_API_URL'),
   alertsApiUrl: read('VITE_ALERTS_API_URL'),
+  userApiUrl: read('VITE_USER_API_URL'),
   analyticsApiUrl: read('VITE_ANALYTICS_API_URL'),
   rpcUrl: read('VITE_RPC_URL'),
   chainId: read('VITE_CHAIN_ID'),
@@ -31,6 +32,7 @@ export const providers = Object.freeze({
   filings: Boolean(env.filingsApiUrl),
   rewards: Boolean(env.rewardsApiUrl),
   alerts: Boolean(env.alertsApiUrl),
+  user: Boolean(env.userApiUrl),
   analytics: Boolean(env.analyticsApiUrl),
   chain: Boolean(env.rpcUrl && env.rewardContractAddress),
 })
