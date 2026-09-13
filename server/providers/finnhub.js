@@ -36,6 +36,9 @@ export function earningsWindow(range = 'week', now = new Date()) {
     case 'week':
       end.setUTCDate(end.getUTCDate() + 7)
       break
+    case 'upcoming':
+      end.setUTCDate(end.getUTCDate() + 14)
+      break
     case 'month':
       end.setUTCMonth(end.getUTCMonth() + 1, 0)
       break
