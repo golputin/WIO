@@ -38,7 +38,11 @@ market.get('/movers', route((req) => yahoo.getMovers(String(req.query.type ?? 'g
 
 market.get('/earnings', route((req) => {
   if (!finnhub.configured()) throw notConfigured('Earnings calendar', 'FINNHUB_API_KEY')
-  return finnhub.getEarnings(req.query.range === 'today' ? 'today' : 'upcoming')
+  const range = String(req.query.range ?? 'week').toLowerCase()
+  if (!['today', 'tomorrow', 'week', 'month'].includes(range)) {
+    throw Object.assign(new Error('Invalid earnings range. Use today, tomorrow, week, or month.'), { status: 400, code: 'invalid_range' })
+  }
+  return finnhub.getEarnings(range)
 }))
 
 // No free, reliable macro-event calendar is wired yet; report it honestly rather than inventing events.

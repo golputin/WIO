@@ -19,12 +19,39 @@ function url(path, params = {}) {
 
 const day = (d) => d.toISOString().slice(0, 10)
 
-/** range: 'today' | 'upcoming' (next 14 days) */
-export async function getEarnings(range = 'upcoming') {
-  const from = new Date()
-  const to = new Date()
-  if (range === 'upcoming') to.setDate(to.getDate() + 14)
-  const json = await fetchJsonCached(url('/calendar/earnings', { from: day(from), to: day(to) }), TTL.earnings, { provider: PROVIDER })
+/**
+ * Build an explicit UTC calendar window. Finnhub expects YYYY-MM-DD; using UTC
+ * consistently prevents the VPS timezone from moving a boundary date.
+ */
+export function earningsWindow(range = 'week', now = new Date()) {
+  const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()))
+  const end = new Date(start)
+  switch (range) {
+    case 'today':
+      break
+    case 'tomorrow':
+      start.setUTCDate(start.getUTCDate() + 1)
+      end.setTime(start.getTime())
+      break
+    case 'week':
+      end.setUTCDate(end.getUTCDate() + 7)
+      break
+    case 'month':
+      end.setUTCMonth(end.getUTCMonth() + 1, 0)
+      break
+    case 'upcoming':
+      end.setUTCDate(end.getUTCDate() + 14)
+      break
+    default:
+      throw Object.assign(new Error(`Invalid earnings range: ${range}. Use today, tomorrow, week, or month.`), { status: 400, code: 'invalid_range' })
+  }
+  return { from: day(start), to: day(end) }
+}
+
+/** range: today | tomorrow | week | month (UTC calendar dates). */
+export async function getEarnings(range = 'week') {
+  const { from, to } = earningsWindow(range)
+  const json = await fetchJsonCached(url('/calendar/earnings', { from, to }), TTL.earnings, { provider: PROVIDER })
   return (json?.earningsCalendar ?? [])
     .filter((e) => e.symbol && e.date)
     .map((e) => ({
