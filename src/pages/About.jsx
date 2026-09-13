@@ -32,11 +32,11 @@ export default function AboutPage() {
             return (
               <Reveal key={c.title} delay={i * 0.06}>
                 <div className="card flex h-full gap-4 p-6">
-                  <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-light text-blue">
+                  <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface-2 text-gold">
                     <Icon className="size-4.5" strokeWidth={1.75} />
                   </span>
                   <div>
-                    <h3 className="font-semibold tracking-tight text-navy">{c.title}</h3>
+                    <h3 className="font-semibold tracking-tight text-fg">{c.title}</h3>
                     <p className="mt-1.5 text-sm leading-relaxed text-muted">{c.text}</p>
                   </div>
                 </div>
@@ -46,10 +46,10 @@ export default function AboutPage() {
         </div>
 
         <Reveal className="mt-10" delay={0.1}>
-          <div className="card flex gap-4 border-blue-100 bg-light/60 p-6">
-            <ShieldCheck className="mt-0.5 size-5 shrink-0 text-blue" strokeWidth={1.75} />
+          <div className="card flex gap-4 border-gold/30 bg-surface-2/60 p-6">
+            <ShieldCheck className="mt-0.5 size-5 shrink-0 text-gold" strokeWidth={1.75} />
             <div className="text-sm">
-              <p className="font-semibold text-navy">Our data principle</p>
+              <p className="font-semibold text-fg">Our data principle</p>
               <p className="mt-1 leading-relaxed text-muted">
                 MarketLens never displays fabricated market, reward or protocol figures. If a data source is not connected or a
                 catalyst cannot be verified, the interface says so. AI explanations are generated only from retrieved sources and

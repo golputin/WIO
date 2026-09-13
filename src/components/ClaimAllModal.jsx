@@ -63,7 +63,7 @@ export default function ClaimAllModal({ open, onClose, rows = [], onSuccess }) {
           </div>
           <div className="flex items-center justify-between border-t border-border py-3">
             <p className="text-[11px] font-semibold tracking-[0.14em] text-muted uppercase">Total</p>
-            <p className="tabular text-right text-base font-bold tracking-tight text-navy">
+            <p className="tabular text-right text-base font-bold tracking-tight text-fg">
               {totalUsd !== null ? (
                 `≈ ${formatNumber(totalUsd, { style: 'currency', currency: 'USD' })}`
               ) : (

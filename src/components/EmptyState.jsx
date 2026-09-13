@@ -26,12 +26,12 @@ export default function EmptyState({
       className={`flex flex-col items-center justify-center text-center ${compact ? 'gap-2 px-4 py-6' : 'gap-3 px-6 py-12'} ${className}`}
     >
       <span
-        className={`inline-flex items-center justify-center rounded-full bg-light text-blue ${compact ? 'size-9' : 'size-12'}`}
+        className={`inline-flex items-center justify-center rounded-full bg-surface-2 text-gold ${compact ? 'size-9' : 'size-12'}`}
       >
         <Icon className={compact ? 'size-4' : 'size-5'} strokeWidth={1.75} />
       </span>
       <div>
-        <p className={`font-semibold text-navy ${compact ? 'text-sm' : 'text-base'}`}>{title}</p>
+        <p className={`font-semibold text-fg ${compact ? 'text-sm' : 'text-base'}`}>{title}</p>
         {description && <p className={`mt-1 text-muted ${compact ? 'text-xs' : 'text-sm'}`}>{description}</p>}
       </div>
       {(action || onRetry) && (

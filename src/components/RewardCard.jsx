@@ -10,7 +10,7 @@ export function AssetMonogram({ symbol, size = 'md', className = '' }) {
   return (
     <span
       aria-hidden="true"
-      className={`inline-flex shrink-0 items-center justify-center rounded-xl bg-light font-bold tracking-tight text-navy ${cls} ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center rounded-xl bg-surface-2 font-bold tracking-tight text-fg ${cls} ${className}`}
     >
       {String(symbol ?? '').slice(0, 2).toUpperCase()}
     </span>
@@ -41,7 +41,7 @@ export default function RewardCard({ row, onClaim, busy = false, index = 0 }) {
       <div className="flex min-w-0 items-center gap-3">
         <AssetMonogram symbol={asset.symbol} />
         <div className="min-w-0">
-          <p className="text-base font-bold tracking-tight text-navy">{asset.symbol}</p>
+          <p className="text-base font-bold tracking-tight text-fg">{asset.symbol}</p>
           <p className="truncate text-xs text-muted">{asset.name}</p>
         </div>
       </div>
@@ -61,7 +61,7 @@ export default function RewardCard({ row, onClaim, busy = false, index = 0 }) {
         </div>
         {amount !== null ? (
           <>
-            <p className="tabular mt-1 text-2xl font-bold tracking-tight text-navy">
+            <p className="tabular mt-1 text-2xl font-bold tracking-tight text-fg">
               {amount} <span className="text-sm font-semibold text-muted">{asset.symbol}</span>
             </p>
             {usd && <p className="tabular mt-0.5 text-xs text-muted">≈ {usd}</p>}

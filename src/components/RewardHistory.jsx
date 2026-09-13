@@ -25,7 +25,7 @@ function TxLink({ hash }) {
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      className="inline-flex items-center gap-1 text-blue underline-offset-2 hover:underline"
+      className="inline-flex items-center gap-1 text-gold underline-offset-2 hover:underline"
       aria-label={`Open transaction ${hash} in block explorer`}
     >
       {label} <ExternalLink className="size-3" />
@@ -55,7 +55,7 @@ export default function RewardHistory({ className = '' }) {
     <section aria-labelledby="reward-history" className={`card overflow-hidden ${className}`}>
       <header className="border-b border-border p-5 sm:p-6">
         <p className="eyebrow">Reward history</p>
-        <h2 id="reward-history" className="mt-1 text-xl font-bold tracking-tight text-navy sm:text-2xl">
+        <h2 id="reward-history" className="mt-1 text-xl font-bold tracking-tight text-fg sm:text-2xl">
           Distributions & claims
         </h2>
       </header>
@@ -102,15 +102,15 @@ export default function RewardHistory({ className = '' }) {
               <tbody className="divide-y divide-border">
                 {entries.map((e) => (
                   <tr key={e.id ?? `${e.txHash}-${e.symbol}-${e.distributedAt}`} className="transition-colors hover:bg-bg">
-                    <td className="tabular px-6 py-3.5 whitespace-nowrap text-navy" title={formatDateTime(e.distributedAt) ?? undefined}>
+                    <td className="tabular px-6 py-3.5 whitespace-nowrap text-fg" title={formatDateTime(e.distributedAt) ?? undefined}>
                       {formatDate(e.distributedAt) ?? <span className="text-muted">—</span>}
                     </td>
                     <td className="px-4 py-3.5">
-                      <span className="inline-flex items-center gap-2.5 font-semibold text-navy">
+                      <span className="inline-flex items-center gap-2.5 font-semibold text-fg">
                         <AssetMonogram symbol={e.symbol} size="sm" /> {e.symbol}
                       </span>
                     </td>
-                    <td className="tabular px-4 py-3.5 text-right font-semibold text-navy">
+                    <td className="tabular px-4 py-3.5 text-right font-semibold text-fg">
                       {formatTokenAmount(e.amount, e.decimals) ?? <span className="font-normal text-muted">—</span>}
                     </td>
                     <td className="px-4 py-3.5">
@@ -130,14 +130,14 @@ export default function RewardHistory({ className = '' }) {
             {entries.map((e) => (
               <li key={e.id ?? `${e.txHash}-${e.symbol}-${e.distributedAt}`} className="flex flex-col gap-2 p-5">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex items-center gap-2.5 font-semibold text-navy">
+                  <span className="inline-flex items-center gap-2.5 font-semibold text-fg">
                     <AssetMonogram symbol={e.symbol} size="sm" /> {e.symbol}
                   </span>
                   <StatusBadge status={e.status} />
                 </div>
                 <div className="flex items-center justify-between gap-3 text-sm">
                   <span className="text-muted">{formatDateTime(e.distributedAt) ?? '—'}</span>
-                  <span className="tabular font-semibold text-navy">{formatTokenAmount(e.amount, e.decimals) ?? '—'}</span>
+                  <span className="tabular font-semibold text-fg">{formatTokenAmount(e.amount, e.decimals) ?? '—'}</span>
                 </div>
                 <div className="text-xs">
                   <TxLink hash={e.txHash} />

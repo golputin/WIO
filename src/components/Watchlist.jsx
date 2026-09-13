@@ -34,7 +34,7 @@ export default function Watchlist() {
               </Badge>
             )}
           </div>
-          <h2 id="watchlist-heading" className="mt-1 text-xl font-bold tracking-tight text-navy sm:text-2xl">
+          <h2 id="watchlist-heading" className="mt-1 text-xl font-bold tracking-tight text-fg sm:text-2xl">
             {wl.symbols.length > 0 ? `${wl.symbols.length} ${wl.symbols.length === 1 ? 'asset' : 'assets'}` : 'Your assets'}
           </h2>
         </div>
@@ -104,7 +104,7 @@ export default function Watchlist() {
                   </motion.div>
                 ) : (
                   <motion.li key={symbol} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center justify-between gap-3 py-3 text-sm">
-                    <span className="font-semibold text-navy">{symbol}</span>
+                    <span className="font-semibold text-fg">{symbol}</span>
                     <span className="text-xs text-muted">Quote unavailable from provider</span>
                     <button type="button" onClick={() => wl.remove(symbol)} className="text-xs text-muted hover:text-red">
                       Remove
@@ -127,7 +127,7 @@ function SymbolOnlyList({ symbols, onRemove }) {
     <ul className="divide-y divide-border border-t border-border">
       {symbols.map((s) => (
         <li key={s} className="flex items-center justify-between gap-3 py-3 text-sm">
-          <span className="font-semibold text-navy">{s}</span>
+          <span className="font-semibold text-fg">{s}</span>
           <button type="button" onClick={() => onRemove(s)} className="text-xs text-muted hover:text-red">
             Remove
           </button>

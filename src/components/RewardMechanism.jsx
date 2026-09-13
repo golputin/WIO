@@ -33,14 +33,14 @@ export default function RewardMechanism({ compact = false }) {
                 transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 className="card flex h-full flex-row items-start gap-4 p-4 lg:flex-col lg:gap-3 lg:p-5"
               >
-                <span className="relative inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-light text-blue">
+                <span className="relative inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface-2 text-gold">
                   <Icon className="size-4.5" strokeWidth={1.75} />
                   <span className="tabular absolute -top-1.5 -right-1.5 inline-flex size-5 items-center justify-center rounded-full bg-navy text-[10px] font-bold text-white">
                     {i + 1}
                   </span>
                 </span>
                 <div className="min-w-0">
-                  <p className="text-sm font-bold tracking-tight text-navy">{s.title}</p>
+                  <p className="text-sm font-bold tracking-tight text-fg">{s.title}</p>
                   <p className="mt-1 text-xs leading-relaxed text-muted">{s.text}</p>
                 </div>
               </motion.div>
@@ -48,14 +48,14 @@ export default function RewardMechanism({ compact = false }) {
               {!last && (
                 <>
                   {/* mobile connector */}
-                  <span aria-hidden="true" className="flex justify-center py-1 text-blue/60 lg:hidden">
+                  <span aria-hidden="true" className="flex justify-center py-1 text-gold/60 lg:hidden">
                     <ArrowDown className="size-4" />
                   </span>
                   {/* desktop connector */}
                   {!compact && (
                     <span
                       aria-hidden="true"
-                      className="absolute top-1/2 -right-[7px] z-10 hidden size-4 -translate-y-1/2 items-center justify-center rounded-full bg-bg text-blue/70 lg:flex"
+                      className="absolute top-1/2 -right-[7px] z-10 hidden size-4 -translate-y-1/2 items-center justify-center rounded-full bg-bg text-gold/70 lg:flex"
                     >
                       <ArrowRight className="size-3.5" />
                     </span>

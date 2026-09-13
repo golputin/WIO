@@ -16,10 +16,10 @@ export function PrincipleGrid({ className = '' }) {
         return (
           <Reveal key={p.title} delay={i * 0.07}>
             <div className="card card-hover h-full p-6 sm:p-7">
-              <span className="inline-flex size-11 items-center justify-center rounded-xl bg-light text-blue">
+              <span className="inline-flex size-11 items-center justify-center rounded-xl bg-surface-2 text-gold">
                 <Icon className="size-5" strokeWidth={1.75} />
               </span>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight text-navy">{p.title}</h3>
+              <h3 className="mt-5 text-xl font-semibold tracking-tight text-fg">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{p.text}</p>
             </div>
           </Reveal>

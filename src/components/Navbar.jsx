@@ -32,7 +32,7 @@ export default function Navbar() {
 
   const linkCls = ({ isActive }) =>
     `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-      isActive ? 'bg-light text-blue' : 'text-navy/80 hover:bg-light hover:text-navy'
+      isActive ? 'bg-surface-2 text-gold' : 'text-fg-2 hover:bg-surface-2 hover:text-fg'
     }`
 
   return (
@@ -40,7 +40,7 @@ export default function Navbar() {
       <motion.header
         className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ${
           scrolled
-            ? 'border-border/80 bg-white/70 shadow-[0_1px_0_rgba(11,31,58,0.02)] backdrop-blur-xl'
+            ? 'border-border/80 bg-surface/70 shadow-[0_1px_0_rgba(11,31,58,0.02)] backdrop-blur-xl'
             : 'border-transparent bg-bg/0'
         }`}
         initial={{ y: -16, opacity: 0 }}
@@ -102,7 +102,7 @@ export default function Navbar() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.22 }}
-              className="overflow-hidden border-t border-border bg-white/95 backdrop-blur-xl lg:hidden"
+              className="overflow-hidden border-t border-border bg-surface/95 backdrop-blur-xl lg:hidden"
             >
               <div className="container-x flex flex-col gap-1 py-3">
                 {NAV_LINKS.map((l) => (

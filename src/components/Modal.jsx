@@ -51,11 +51,11 @@ export default function Modal({ open, onClose, title, description, locked = fals
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className={`flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl border border-border bg-white shadow-float outline-none sm:rounded-2xl ${width}`}
+            className={`flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl border border-border bg-surface shadow-float outline-none sm:rounded-2xl ${width}`}
           >
             <div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4 sm:px-6">
               <div className="min-w-0">
-                <h2 id={titleId} className="text-lg font-bold tracking-tight text-navy">
+                <h2 id={titleId} className="text-lg font-bold tracking-tight text-fg">
                   {title}
                 </h2>
                 {description && (
@@ -69,7 +69,7 @@ export default function Modal({ open, onClose, title, description, locked = fals
                 onClick={onClose}
                 disabled={locked}
                 aria-label="Close"
-                className="-mr-1 inline-flex size-9 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-light hover:text-navy disabled:cursor-not-allowed disabled:opacity-40"
+                className="-mr-1 inline-flex size-9 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-surface-2 hover:text-fg disabled:cursor-not-allowed disabled:opacity-40"
               >
                 <X className="size-4" />
               </button>

@@ -3,7 +3,7 @@ import { changeTone, formatPercent } from '../utils/formatters.js'
 
 /** Section wrapper with consistent vertical rhythm. */
 export function Section({ id, className = '', children, tone = 'default' }) {
-  const bg = tone === 'tint' ? 'bg-white' : ''
+  const bg = tone === 'tint' ? 'bg-surface' : ''
   return (
     <section id={id} className={`relative py-16 sm:py-20 lg:py-24 ${bg} ${className}`}>
       <div className="container-x">{children}</div>
@@ -16,7 +16,7 @@ export function SectionHeader({ eyebrow, title, subtitle, align = 'center', clas
   return (
     <div className={`max-w-2xl ${alignCls} ${className}`}>
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <Heading className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+      <Heading className="mt-3 text-3xl font-bold tracking-tight text-fg sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         {title}
       </Heading>
       {subtitle && <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{subtitle}</p>}
@@ -42,13 +42,13 @@ export function Reveal({ children, delay = 0, className = '', y = 20, once = tru
 
 export function Badge({ children, tone = 'neutral', dot = false, className = '' }) {
   const tones = {
-    neutral: 'bg-light text-navy',
-    blue: 'bg-blue-100 text-blue-700',
-    green: 'bg-green-100 text-[#0f8a5f]',
+    neutral: 'bg-surface-2 text-fg',
+    blue: 'bg-gold-100 text-gold-300',
+    green: 'bg-green-100 text-green',
     red: 'bg-red-100 text-red',
     muted: 'bg-bg text-muted border border-border',
   }
-  const dots = { neutral: 'bg-navy', blue: 'bg-blue', green: 'bg-green', red: 'bg-red', muted: 'bg-muted' }
+  const dots = { neutral: 'bg-navy', blue: 'bg-gold', green: 'bg-green', red: 'bg-red', muted: 'bg-muted' }
   return (
     <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${tones[tone]} ${className}`}>
       {dot && <span className={`size-1.5 rounded-full ${dots[tone]}`} />}
@@ -79,7 +79,7 @@ export function SourceList({ sources = [] }) {
         {sources.map((s, i) => (
           <li key={`${s.label}-${i}`}>
             {s.url ? (
-              <a href={s.url} target="_blank" rel="noreferrer noopener" className="text-blue hover:underline">
+              <a href={s.url} target="_blank" rel="noreferrer noopener" className="text-gold hover:underline">
                 {s.label}
               </a>
             ) : (

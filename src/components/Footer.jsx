@@ -6,7 +6,7 @@ import XIcon from './XIcon.jsx'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-white">
+    <footer className="border-t border-border bg-surface">
       <div className="container-x py-14">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -16,7 +16,7 @@ export default function Footer() {
               href={env.xUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="mt-5 inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium text-navy transition hover:border-blue-100 hover:bg-light"
+              className="mt-5 inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium text-fg transition hover:border-gold/30 hover:bg-surface-2"
             >
               <XIcon className="size-3.5" /> Follow on X
             </a>
@@ -25,11 +25,11 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
             {FOOTER_COLUMNS.map((col) => (
               <div key={col.heading}>
-                <p className="text-xs font-semibold tracking-wider text-navy uppercase">{col.heading}</p>
+                <p className="text-xs font-semibold tracking-wider text-fg uppercase">{col.heading}</p>
                 <ul className="mt-4 space-y-2.5">
                   {col.links.map((l) => (
                     <li key={l.to}>
-                      <Link to={l.to} className="text-sm text-muted transition hover:text-blue">
+                      <Link to={l.to} className="text-sm text-muted transition hover:text-gold">
                         {l.label}
                       </Link>
                     </li>
@@ -38,14 +38,14 @@ export default function Footer() {
               </div>
             ))}
             <div>
-              <p className="text-xs font-semibold tracking-wider text-navy uppercase">Community</p>
+              <p className="text-xs font-semibold tracking-wider text-fg uppercase">Community</p>
               <ul className="mt-4 space-y-2.5">
                 <li>
                   <a
                     href={env.xUrl}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-blue"
+                    className="inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-gold"
                   >
                     <XIcon className="size-3" /> X
                   </a>

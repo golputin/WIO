@@ -55,8 +55,8 @@ export default function StockChart({ candles, state, height = 160, tone = 'neutr
               if (!active || !payload?.[0]) return null
               const p = payload[0].payload
               return (
-                <div className="rounded-lg border border-border bg-white px-2.5 py-1.5 text-xs shadow-card">
-                  <p className="tabular font-semibold text-navy">{formatPrice(p.c, currency)}</p>
+                <div className="rounded-lg border border-border bg-surface px-2.5 py-1.5 text-xs shadow-card">
+                  <p className="tabular font-semibold text-fg">{formatPrice(p.c, currency)}</p>
                   <p className="text-muted">{formatDateTime(p.t)}</p>
                 </div>
               )

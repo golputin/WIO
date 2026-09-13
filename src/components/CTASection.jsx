@@ -40,7 +40,7 @@ export default function CTASection() {
               </Link>
               <Link
                 to="/rewards"
-                className="btn border border-white/15 bg-white/5 text-white hover:border-white/30 hover:bg-white/10"
+                className="btn border border-white/15 bg-surface/5 text-white hover:border-white/30 hover:bg-surface/10"
               >
                 <Gift className="size-4" strokeWidth={2} /> View Rewards
               </Link>

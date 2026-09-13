@@ -27,7 +27,7 @@ export function QuoteRow({ q, onRemove, showVolume = true }) {
     <li className="group flex items-center gap-3 py-3 sm:gap-4">
       <AssetMonogram symbol={q.symbol} size="sm" />
       <div className="min-w-0 flex-1">
-        <Link to={`/markets?symbol=${encodeURIComponent(q.symbol)}`} className="font-semibold text-navy hover:text-blue">
+        <Link to={`/markets?symbol=${encodeURIComponent(q.symbol)}`} className="font-semibold text-fg hover:text-gold">
           {q.symbol}
         </Link>
         <p className="truncate text-xs text-muted">{q.name}</p>
@@ -39,7 +39,7 @@ export function QuoteRow({ q, onRemove, showVolume = true }) {
         </div>
       )}
       <div className="tabular text-right">
-        <p className="text-sm font-semibold text-navy">{price ?? <span className="text-muted">—</span>}</p>
+        <p className="text-sm font-semibold text-fg">{price ?? <span className="text-muted">—</span>}</p>
         <p className="text-xs">
           <span className={`hidden sm:inline ${changeCls}`}>{formatChange(q.change, q.currency)} </span>
           <ChangeText value={q.changePercent} />
@@ -48,7 +48,7 @@ export function QuoteRow({ q, onRemove, showVolume = true }) {
       <Link
         to={`/markets?symbol=${encodeURIComponent(q.symbol)}`}
         aria-label={`Open analysis for ${q.symbol}`}
-        className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-light hover:text-blue"
+        className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-surface-2 hover:text-gold"
       >
         <ArrowUpRight className="size-4" />
       </Link>

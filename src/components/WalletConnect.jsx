@@ -41,9 +41,9 @@ export default function WalletConnect({ size = 'md', className = '' }) {
           {busy ? 'Connecting...' : 'Connect Wallet'}
         </button>
         {wallet.error && wallet.status !== 'connecting' && (
-          <p role="alert" className="absolute top-full right-0 mt-2 w-64 rounded-lg border border-border bg-white p-2.5 text-xs text-muted shadow-card">
+          <p role="alert" className="absolute top-full right-0 mt-2 w-64 rounded-lg border border-border bg-surface p-2.5 text-xs text-muted shadow-card">
             {wallet.error.message}
-            <button type="button" onClick={wallet.clearError} className="ml-2 text-blue hover:underline">
+            <button type="button" onClick={wallet.clearError} className="ml-2 text-gold hover:underline">
               Dismiss
             </button>
           </p>
@@ -87,11 +87,11 @@ export default function WalletConnect({ size = 'md', className = '' }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -4, scale: 0.98 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 z-50 mt-2 w-64 overflow-hidden rounded-xl border border-border bg-white p-1.5 shadow-float"
+            className="absolute right-0 z-50 mt-2 w-64 overflow-hidden rounded-xl border border-border bg-surface p-1.5 shadow-float"
           >
             <div className="px-3 py-2">
               <p className="text-[11px] font-semibold tracking-wider text-muted uppercase">Connected</p>
-              <p className="mt-0.5 font-mono text-xs break-all text-navy">{wallet.address}</p>
+              <p className="mt-0.5 font-mono text-xs break-all text-fg">{wallet.address}</p>
               {wallet.chainId && <p className="mt-1 text-xs text-muted">Chain ID {wallet.chainId}</p>}
             </div>
             {wallet.wrongNetwork && (
@@ -108,7 +108,7 @@ export default function WalletConnect({ size = 'md', className = '' }) {
               type="button"
               role="menuitem"
               onClick={copy}
-              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-navy hover:bg-light"
+              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-fg hover:bg-surface-2"
             >
               <Copy className="size-4" /> {copied ? 'Copied' : 'Copy address'}
             </button>
@@ -119,7 +119,7 @@ export default function WalletConnect({ size = 'md', className = '' }) {
                 wallet.disconnect()
                 setOpen(false)
               }}
-              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-navy hover:bg-light"
+              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-fg hover:bg-surface-2"
             >
               <LogOut className="size-4" /> Disconnect
             </button>

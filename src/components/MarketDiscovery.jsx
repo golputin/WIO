@@ -14,11 +14,11 @@ function DiscoveryCard({ icon: Icon, title, subtitle, res, configured, notConfig
   return (
     <section aria-label={title} className={`card flex flex-col overflow-hidden ${className}`}>
       <header className="flex items-center gap-2.5 border-b border-border px-5 py-4">
-        <span className="inline-flex size-8 items-center justify-center rounded-lg bg-light text-blue">
+        <span className="inline-flex size-8 items-center justify-center rounded-lg bg-surface-2 text-gold">
           <Icon className="size-4" strokeWidth={1.75} />
         </span>
         <div>
-          <h2 className="text-sm font-bold tracking-tight text-navy">{title}</h2>
+          <h2 className="text-sm font-bold tracking-tight text-fg">{title}</h2>
           {subtitle && <p className="text-xs text-muted">{subtitle}</p>}
         </div>
       </header>
@@ -90,13 +90,13 @@ function EarningsCard() {
         {(res.data ?? []).slice(0, 8).map((e) => (
           <li key={`${e.symbol}-${e.date}`} className="flex items-center justify-between gap-3 py-3 text-sm">
             <div className="min-w-0">
-              <Link to={`/markets?symbol=${encodeURIComponent(e.symbol)}`} className="font-semibold text-navy hover:text-blue">
+              <Link to={`/markets?symbol=${encodeURIComponent(e.symbol)}`} className="font-semibold text-fg hover:text-gold">
                 {e.symbol}
               </Link>
               <p className="truncate text-xs text-muted">{e.name}</p>
             </div>
             <div className="text-right text-xs">
-              <p className="tabular font-semibold text-navy">{formatDate(e.date)}</p>
+              <p className="tabular font-semibold text-fg">{formatDate(e.date)}</p>
               {e.time && <p className="text-muted">{e.time}</p>}
             </div>
           </li>
@@ -124,7 +124,7 @@ function FilingsCard() {
           <li key={f.id ?? `${f.symbol}-${f.filedAt}`} className="flex items-center justify-between gap-3 py-3 text-sm">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <Link to={`/markets?symbol=${encodeURIComponent(f.symbol)}`} className="font-semibold text-navy hover:text-blue">
+                <Link to={`/markets?symbol=${encodeURIComponent(f.symbol)}`} className="font-semibold text-fg hover:text-gold">
                   {f.symbol}
                 </Link>
                 {f.formType && <Badge tone="blue">{f.formType}</Badge>}
@@ -156,7 +156,7 @@ function EventsCard() {
         {(res.data ?? []).slice(0, 8).map((ev) => (
           <li key={ev.id ?? `${ev.title}-${ev.date}`} className="py-3 text-sm">
             <div className="flex items-start justify-between gap-3">
-              <p className="font-semibold text-navy">{ev.title}</p>
+              <p className="font-semibold text-fg">{ev.title}</p>
               <p className="tabular shrink-0 text-xs text-muted">{formatDateTime(ev.date)}</p>
             </div>
             <div className="mt-1 flex items-center gap-2 text-xs text-muted">

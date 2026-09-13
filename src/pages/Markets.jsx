@@ -43,7 +43,7 @@ export default function MarketsPage() {
                 className="btn-secondary !px-3.5 !py-2 text-xs"
                 aria-pressed={watched}
               >
-                {watched ? <BookmarkCheck className="size-3.5 text-blue" /> : <Bookmark className="size-3.5" />}
+                {watched ? <BookmarkCheck className="size-3.5 text-gold" /> : <Bookmark className="size-3.5" />}
                 {watched ? 'In watchlist' : 'Add to watchlist'}
               </button>
             )}

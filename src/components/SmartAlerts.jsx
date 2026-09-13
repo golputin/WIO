@@ -49,15 +49,15 @@ export default function SmartAlerts() {
       {/* Builder */}
       <form onSubmit={submit} className="card p-6 lg:col-span-5" noValidate>
         <div className="flex items-center gap-2">
-          <Bell className="size-4 text-blue" />
-          <h3 className="text-lg font-semibold tracking-tight text-navy">Create Market Alert</h3>
+          <Bell className="size-4 text-gold" />
+          <h3 className="text-lg font-semibold tracking-tight text-fg">Create Market Alert</h3>
         </div>
 
         {!serviceConfigured && (
           <div role="status" className="mt-4 flex gap-3 rounded-xl border border-border bg-bg p-3.5 text-sm">
             <BellOff className="mt-0.5 size-4 shrink-0 text-muted" />
             <div>
-              <p className="font-semibold text-navy">Alert service unavailable.</p>
+              <p className="font-semibold text-fg">Alert service unavailable.</p>
               <p className="text-muted">Connect the alert backend to enable notifications.</p>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function SmartAlerts() {
             <span className="label">Asset</span>
             <div className="flex items-center gap-3">
               <div className="input flex min-h-[42px] items-center">
-                {symbol ? <span className="font-mono text-sm font-semibold text-navy">{symbol}</span> : <span className="text-muted/70">Search asset</span>}
+                {symbol ? <span className="font-mono text-sm font-semibold text-fg">{symbol}</span> : <span className="text-muted/70">Search asset</span>}
               </div>
               <SymbolPicker value={symbol} onChange={setSymbol} label="Change" />
             </div>
@@ -137,7 +137,7 @@ export default function SmartAlerts() {
       {/* Existing rules */}
       <div className="card p-6 lg:col-span-7">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold tracking-tight text-navy">Your alerts</h3>
+          <h3 className="text-lg font-semibold tracking-tight text-fg">Your alerts</h3>
           {list.state === 'ok' && <Badge tone="muted">{rules.length} active</Badge>}
         </div>
         <div className="mt-4">
@@ -158,9 +158,9 @@ export default function SmartAlerts() {
                 const c = ALERT_CONDITIONS.find((x) => x.value === r.condition)
                 return (
                   <li key={r.id} className="flex items-center gap-4 py-3.5">
-                    <span className="inline-flex min-w-16 justify-center rounded-lg bg-light px-2 py-1.5 font-mono text-xs font-semibold text-navy">{r.symbol}</span>
+                    <span className="inline-flex min-w-16 justify-center rounded-lg bg-surface-2 px-2 py-1.5 font-mono text-xs font-semibold text-fg">{r.symbol}</span>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-navy">
+                      <p className="text-sm font-medium text-fg">
                         {c?.label ?? r.condition}
                         {r.threshold !== null && r.threshold !== undefined && (
                           <span className="tabular ml-1.5 text-muted">

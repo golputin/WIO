@@ -25,12 +25,12 @@ export function ClaimRow({ symbol, name, amount, decimals, claimableUsd, emphasi
       <div className="flex min-w-0 items-center gap-3">
         <AssetMonogram symbol={symbol} size="sm" />
         <div className="min-w-0">
-          <p className={`font-semibold text-navy ${emphasis ? 'text-base' : 'text-sm'}`}>{symbol}</p>
+          <p className={`font-semibold text-fg ${emphasis ? 'text-base' : 'text-sm'}`}>{symbol}</p>
           {name && <p className="truncate text-xs text-muted">{name}</p>}
         </div>
       </div>
       <div className="text-right">
-        <p className={`tabular font-bold tracking-tight text-navy ${emphasis ? 'text-lg' : 'text-sm'}`}>
+        <p className={`tabular font-bold tracking-tight text-fg ${emphasis ? 'text-lg' : 'text-sm'}`}>
           {formatted ?? <span className="text-muted">Unavailable</span>}
         </p>
         {usd && <p className="tabular text-xs text-muted">≈ {usd}</p>}
@@ -47,7 +47,7 @@ export function ClaimFeeBlock({ step, gas, error }) {
     <div className="rounded-xl border border-border bg-bg p-4">
       <div className="flex items-center justify-between gap-4">
         <p className="text-[11px] font-semibold tracking-[0.14em] text-muted uppercase">Estimated network fee</p>
-        {step === 'estimating' && <Loader2 className="size-3.5 animate-spin text-blue" aria-hidden="true" />}
+        {step === 'estimating' && <Loader2 className="size-3.5 animate-spin text-gold" aria-hidden="true" />}
       </div>
       {step === 'estimating' ? (
         <div className="mt-2 space-y-2" aria-busy="true">
@@ -56,14 +56,14 @@ export function ClaimFeeBlock({ step, gas, error }) {
         </div>
       ) : gas ? (
         <>
-          <p className="tabular mt-1.5 text-lg font-bold tracking-tight text-navy">
+          <p className="tabular mt-1.5 text-lg font-bold tracking-tight text-fg">
             {total} {symbol}
           </p>
           <dl className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-muted">
             <dt>Estimated gas</dt>
-            <dd className="tabular text-right text-navy">{formatNumber(Number(gas.gasLimit))}</dd>
+            <dd className="tabular text-right text-fg">{formatNumber(Number(gas.gasLimit))}</dd>
             <dt>Gas price</dt>
-            <dd className="tabular text-right text-navy">{formatGwei(gas.gasPriceWei)}</dd>
+            <dd className="tabular text-right text-fg">{formatGwei(gas.gasPriceWei)}</dd>
           </dl>
         </>
       ) : (
@@ -81,7 +81,7 @@ export function ClaimProgress({ step, txHash, error }) {
   const isSuccess = step === 'success'
   const isBad = step === 'failed' || step === 'rejected' || step === 'unavailable'
   const Icon = isSuccess ? CheckCircle2 : isBad ? XCircle : Loader2
-  const tone = isSuccess ? 'border-green/30 bg-green-100 text-[#0f8a5f]' : isBad ? 'border-red/30 bg-red-100 text-red' : 'border-blue-100 bg-light text-blue'
+  const tone = isSuccess ? 'border-green/30 bg-green-100 text-green' : isBad ? 'border-red/40 bg-red-100 text-red' : 'border-gold/30 bg-surface-2 text-gold'
 
   return (
     <AnimatePresence mode="wait">

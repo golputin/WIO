@@ -31,9 +31,9 @@ export default function RewardsPage() {
             </Reveal>
             <Reveal delay={0.1}>
               <div className="card flex gap-3 p-5">
-                <ShieldCheck className="mt-0.5 size-5 shrink-0 text-blue" strokeWidth={1.75} />
+                <ShieldCheck className="mt-0.5 size-5 shrink-0 text-gold" strokeWidth={1.75} />
                 <div className="text-sm">
-                  <p className="font-semibold text-navy">Non-custodial by design</p>
+                  <p className="font-semibold text-fg">Non-custodial by design</p>
                   <p className="mt-1 leading-relaxed text-muted">
                     MarketLens never holds your keys or funds. Reward accounting lives in the contract, and every claim is a
                     transaction you sign yourself.

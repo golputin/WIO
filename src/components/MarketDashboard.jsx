@@ -68,7 +68,7 @@ export default function MarketDashboard({ symbol: symbolProp, floating = true })
                 ) : q ? (
                   <>
                     <div className="flex items-center gap-2">
-                      <span className="text-xl font-bold tracking-tight text-navy">{q.symbol}</span>
+                      <span className="text-xl font-bold tracking-tight text-fg">{q.symbol}</span>
                       {q.exchange && <Badge tone="muted">{q.exchange}</Badge>}
                     </div>
                     <p className="mt-0.5 truncate text-sm text-muted">{q.name}</p>
@@ -85,7 +85,7 @@ export default function MarketDashboard({ symbol: symbolProp, floating = true })
                   </>
                 ) : q ? (
                   <>
-                    <p className="tabular text-2xl font-bold tracking-tight text-navy">{formatPrice(q.price, q.currency)}</p>
+                    <p className="tabular text-2xl font-bold tracking-tight text-fg">{formatPrice(q.price, q.currency)}</p>
                     <p className="tabular mt-0.5 text-sm">
                       <span className={tone === 'positive' ? 'text-green' : tone === 'negative' ? 'text-red' : 'text-muted'}>
                         {formatChange(q.change, q.currency)}
@@ -117,8 +117,8 @@ export default function MarketDashboard({ symbol: symbolProp, floating = true })
             {/* Why is it moving */}
             <div className="mt-5 rounded-xl border border-border bg-bg p-4">
               <div className="flex items-center gap-2">
-                <Activity className="size-3.5 text-blue" />
-                <p className="text-[11px] font-semibold tracking-[0.14em] text-navy uppercase">Why is it moving?</p>
+                <Activity className="size-3.5 text-gold" />
+                <p className="text-[11px] font-semibold tracking-[0.14em] text-fg uppercase">Why is it moving?</p>
               </div>
               <div className="mt-2.5 text-sm">
                 {!providers.analytics ? (
@@ -129,7 +129,7 @@ export default function MarketDashboard({ symbol: symbolProp, floating = true })
                     <Skeleton className="h-3.5 w-3/4" />
                   </div>
                 ) : analysis.state === 'ok' && analysis.data?.catalystDetected && analysis.data.factors?.[0] ? (
-                  <p className="text-navy">{analysis.data.factors[0].title}</p>
+                  <p className="text-fg">{analysis.data.factors[0].title}</p>
                 ) : analysis.state === 'ok' ? (
                   <p className="text-muted">No verified catalyst detected yet. MarketLens is continuing to monitor available sources.</p>
                 ) : (
@@ -146,7 +146,7 @@ export default function MarketDashboard({ symbol: symbolProp, floating = true })
               {earnings.state === 'loading' ? (
                 <Skeleton className="h-3.5 w-20" />
               ) : nextEarnings?.date ? (
-                <span className="font-semibold text-navy">{formatDate(nextEarnings.date)}</span>
+                <span className="font-semibold text-fg">{formatDate(nextEarnings.date)}</span>
               ) : (
                 <span className="text-muted">Not scheduled</span>
               )}
@@ -160,12 +160,12 @@ export default function MarketDashboard({ symbol: symbolProp, floating = true })
 
 function Metric({ label, value, loading, unavailableText = '—' }) {
   return (
-    <div className="rounded-xl border border-border bg-white px-3 py-2.5">
+    <div className="rounded-xl border border-border bg-surface px-3 py-2.5">
       <p className="text-[11px] font-medium text-muted">{label}</p>
       {loading ? (
         <Skeleton className="mt-1.5 h-4 w-14" />
       ) : (
-        <p className={`tabular mt-0.5 text-sm font-semibold ${value ? 'text-navy' : 'text-muted/70'}`}>{value ?? unavailableText}</p>
+        <p className={`tabular mt-0.5 text-sm font-semibold ${value ? 'text-fg' : 'text-muted/70'}`}>{value ?? unavailableText}</p>
       )}
     </div>
   )
@@ -174,10 +174,10 @@ function Metric({ label, value, loading, unavailableText = '—' }) {
 function WaitingState({ reason }) {
   return (
     <div className="flex flex-col items-center justify-center px-6 py-14 text-center">
-      <span className="inline-flex size-12 items-center justify-center rounded-full bg-light text-blue">
+      <span className="inline-flex size-12 items-center justify-center rounded-full bg-surface-2 text-gold">
         <Radio className="size-5" strokeWidth={1.75} />
       </span>
-      <p className="mt-4 text-base font-semibold text-navy">Waiting for market data...</p>
+      <p className="mt-4 text-base font-semibold text-fg">Waiting for market data...</p>
       <p className="mt-1 max-w-xs text-sm text-muted">
         {reason === 'not_configured'
           ? 'Connect a market data provider to display live prices, charts and analysis here.'
@@ -191,8 +191,8 @@ function WaitingState({ reason }) {
       <div className="mt-8 grid w-full grid-cols-3 gap-3 opacity-60" aria-hidden="true">
         {[0, 1, 2].map((i) => (
           <div key={i} className="rounded-xl border border-dashed border-border px-3 py-2.5">
-            <div className="h-2.5 w-12 rounded bg-light" />
-            <div className="mt-2 h-3.5 w-16 rounded bg-light" />
+            <div className="h-2.5 w-12 rounded bg-surface-2" />
+            <div className="mt-2 h-3.5 w-16 rounded bg-surface-2" />
           </div>
         ))}
       </div>

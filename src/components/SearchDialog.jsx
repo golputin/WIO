@@ -60,7 +60,7 @@ export default function SearchDialog({ open, onClose, onSelect, placeholder = 'S
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
             transition={{ duration: 0.18 }}
-            className="w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-white shadow-float"
+            className="w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-surface shadow-float"
           >
             <div className="flex items-center gap-3 border-b border-border px-4">
               <Search className="size-4 shrink-0 text-muted" />
@@ -72,10 +72,10 @@ export default function SearchDialog({ open, onClose, onSelect, placeholder = 'S
                   if (e.key === 'Enter' && results[0]) select(results[0].symbol)
                 }}
                 placeholder={placeholder}
-                className="h-14 w-full bg-transparent text-base text-navy outline-none placeholder:text-muted/70"
+                className="h-14 w-full bg-transparent text-base text-fg outline-none placeholder:text-muted/70"
                 aria-label="Search assets"
               />
-              <button type="button" onClick={onClose} className="rounded-lg p-1.5 text-muted hover:bg-light" aria-label="Close search">
+              <button type="button" onClick={onClose} className="rounded-lg p-1.5 text-muted hover:bg-surface-2" aria-label="Close search">
                 <X className="size-4" />
               </button>
             </div>
@@ -110,12 +110,12 @@ export default function SearchDialog({ open, onClose, onSelect, placeholder = 'S
                         role="option"
                         aria-selected="false"
                         onClick={() => select(r.symbol)}
-                        className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-light"
+                        className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left hover:bg-surface-2"
                       >
-                        <span className="inline-flex min-w-14 items-center justify-center rounded-lg bg-light px-2 py-1.5 font-mono text-xs font-semibold text-navy group-hover:bg-white">
+                        <span className="inline-flex min-w-14 items-center justify-center rounded-lg bg-surface-2 px-2 py-1.5 font-mono text-xs font-semibold text-fg group-hover:bg-surface">
                           {r.symbol}
                         </span>
-                        <span className="flex-1 truncate text-sm text-navy">{r.name}</span>
+                        <span className="flex-1 truncate text-sm text-fg">{r.name}</span>
                         {r.exchange && <span className="hidden text-xs text-muted sm:block">{r.exchange}</span>}
                         <ArrowRight className="size-4 text-muted opacity-0 transition group-hover:opacity-100" />
                       </button>

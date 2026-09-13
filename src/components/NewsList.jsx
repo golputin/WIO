@@ -13,8 +13,8 @@ export default function NewsList({ symbol, limit = 8, title = 'Latest news', cla
   return (
     <section aria-labelledby="news-heading" className={`card overflow-hidden ${className}`}>
       <header className="flex items-center gap-2 border-b border-border px-5 py-4">
-        <Newspaper className="size-4 text-blue" />
-        <h2 id="news-heading" className="text-sm font-bold tracking-tight text-navy">
+        <Newspaper className="size-4 text-gold" />
+        <h2 id="news-heading" className="text-sm font-bold tracking-tight text-fg">
           {title}
           {symbol && <span className="ml-1.5 font-semibold text-muted">· {symbol}</span>}
         </h2>
@@ -48,13 +48,13 @@ export default function NewsList({ symbol, limit = 8, title = 'Latest news', cla
                 className="group flex items-start gap-3 px-5 py-3.5 transition hover:bg-bg"
               >
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm leading-snug font-semibold text-navy group-hover:text-blue">{n.headline}</p>
+                  <p className="text-sm leading-snug font-semibold text-fg group-hover:text-gold">{n.headline}</p>
                   <p className="mt-1 text-xs text-muted">
                     {n.source}
                     {n.publishedAt && <> · {formatRelative(n.publishedAt)}</>}
                   </p>
                 </div>
-                <ExternalLink className="mt-1 size-3.5 shrink-0 text-muted group-hover:text-blue" />
+                <ExternalLink className="mt-1 size-3.5 shrink-0 text-muted group-hover:text-gold" />
               </a>
             </li>
           ))}

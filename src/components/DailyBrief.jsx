@@ -20,7 +20,7 @@ export default function DailyBrief() {
     <article className="card overflow-hidden shadow-float">
       <header className="flex flex-col gap-2 border-b border-border bg-navy px-6 py-6 text-white sm:flex-row sm:items-end sm:justify-between sm:px-8">
         <div>
-          <p className="text-[11px] font-semibold tracking-[0.16em] text-[#7FB4FF] uppercase">MarketLens Daily</p>
+          <p className="text-[11px] font-semibold tracking-[0.16em] text-gold-300 uppercase">MarketLens Daily</p>
           <h3 className="mt-1.5 text-2xl font-bold tracking-tight">{b?.date ? formatDate(b.date, { weekday: 'long', month: 'long' }) : todayLabel()}</h3>
         </div>
         <span className="inline-flex items-center gap-1.5 text-xs text-white/70">
@@ -40,7 +40,7 @@ export default function DailyBrief() {
       ) : (
         <div className="grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
           <Block title="Market overview" className="lg:col-span-3">
-            {res.state === 'loading' ? <SkeletonText lines={3} /> : b?.overview ? <p className="text-sm leading-relaxed text-navy/90">{b.overview}</p> : <Muted>No overview available.</Muted>}
+            {res.state === 'loading' ? <SkeletonText lines={3} /> : b?.overview ? <p className="text-sm leading-relaxed text-fg-2">{b.overview}</p> : <Muted>No overview available.</Muted>}
           </Block>
 
           <Block title="Top movers">
@@ -50,9 +50,9 @@ export default function DailyBrief() {
               <ul className="space-y-2.5">
                 {b.topMovers.map((m) => (
                   <li key={m.symbol} className="flex items-center justify-between text-sm">
-                    <span className="font-semibold text-navy">{m.symbol}</span>
+                    <span className="font-semibold text-fg">{m.symbol}</span>
                     <span className="tabular flex items-center gap-3">
-                      <span className="text-navy/80">{formatPrice(m.price, m.currency)}</span>
+                      <span className="text-fg-2">{formatPrice(m.price, m.currency)}</span>
                       <ChangeText value={m.changePercent} />
                     </span>
                   </li>
@@ -71,12 +71,12 @@ export default function DailyBrief() {
                 {b.whatMatters.map((w, i) => (
                   <li key={i} className="text-sm">
                     {w.url ? (
-                      <a href={w.url} target="_blank" rel="noreferrer noopener" className="group inline-flex items-start gap-1.5 text-navy hover:text-blue">
+                      <a href={w.url} target="_blank" rel="noreferrer noopener" className="group inline-flex items-start gap-1.5 text-fg hover:text-gold">
                         <span>{w.title}</span>
-                        <ExternalLink className="mt-1 size-3 shrink-0 text-muted group-hover:text-blue" />
+                        <ExternalLink className="mt-1 size-3 shrink-0 text-muted group-hover:text-gold" />
                       </a>
                     ) : (
-                      <span className="text-navy">{w.title}</span>
+                      <span className="text-fg">{w.title}</span>
                     )}
                     {w.source && <p className="text-xs text-muted">{w.source}</p>}
                   </li>
@@ -95,7 +95,7 @@ export default function DailyBrief() {
                 {b.earningsToday.map((e) => (
                   <li key={`${e.symbol}-${e.time ?? ''}`} className="flex items-center justify-between text-sm">
                     <span>
-                      <span className="font-semibold text-navy">{e.symbol}</span>
+                      <span className="font-semibold text-fg">{e.symbol}</span>
                       {e.name && <span className="ml-2 text-muted">{e.name}</span>}
                     </span>
                     {e.time && <span className="text-xs text-muted">{e.time}</span>}
@@ -116,9 +116,9 @@ export default function DailyBrief() {
               <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {b.upcomingEvents.map((ev, i) => (
                   <li key={ev.id ?? i} className="flex gap-3 rounded-xl border border-border bg-bg p-3.5">
-                    <CalendarDays className="mt-0.5 size-4 shrink-0 text-blue" />
+                    <CalendarDays className="mt-0.5 size-4 shrink-0 text-gold" />
                     <div>
-                      <p className="text-sm font-medium text-navy">{ev.title}</p>
+                      <p className="text-sm font-medium text-fg">{ev.title}</p>
                       <p className="text-xs text-muted">
                         {formatDate(ev.date)}
                         {ev.category && ` · ${ev.category}`}
@@ -140,8 +140,8 @@ export default function DailyBrief() {
 
 function Block({ title, children, className = '' }) {
   return (
-    <section className={`bg-white p-6 ${className}`}>
-      <p className="text-[11px] font-semibold tracking-[0.14em] text-navy uppercase">{title}</p>
+    <section className={`bg-surface p-6 ${className}`}>
+      <p className="text-[11px] font-semibold tracking-[0.14em] text-fg uppercase">{title}</p>
       <div className="mt-3">{children}</div>
     </section>
   )

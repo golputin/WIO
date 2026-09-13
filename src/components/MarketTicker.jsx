@@ -12,10 +12,10 @@ export default function MarketTicker() {
   const items = state === 'ok' && Array.isArray(data) ? data.filter((d) => typeof d?.value === 'number') : []
 
   return (
-    <div className="border-y border-border bg-white/70 backdrop-blur" role="region" aria-label="Market indices">
+    <div className="border-y border-border bg-surface/70 backdrop-blur" role="region" aria-label="Market indices">
       <div className="container-x flex h-12 items-center gap-4">
         <span className="inline-flex shrink-0 items-center gap-1.5 text-[11px] font-semibold tracking-[0.14em] text-muted uppercase">
-          <Radio className="size-3.5 text-blue" /> Indices
+          <Radio className="size-3.5 text-gold" /> Indices
         </span>
         <div className="relative min-w-0 flex-1 overflow-hidden">
           {state === 'loading' && (
@@ -60,8 +60,8 @@ function TickerItem({ item, ariaHidden = false, className = '' }) {
   const color = tone === 'positive' ? 'text-green' : tone === 'negative' ? 'text-red' : 'text-muted'
   return (
     <li className={`flex items-center gap-2.5 text-sm whitespace-nowrap ${className}`} aria-hidden={ariaHidden || undefined}>
-      <span className="font-semibold text-navy">{item.name ?? item.symbol}</span>
-      <span className="tabular text-navy/80">{formatNumber(item.value)}</span>
+      <span className="font-semibold text-fg">{item.name ?? item.symbol}</span>
+      <span className="tabular text-fg-2">{formatNumber(item.value)}</span>
       <span className={`tabular font-semibold ${color}`}>{formatPercent(item.changePercent)}</span>
     </li>
   )

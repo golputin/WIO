@@ -36,7 +36,7 @@ export default function Rewards() {
       <header className="flex flex-col gap-3 border-b border-border p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
         <div>
           <p className="eyebrow">Your stock rewards</p>
-          <h2 id="your-rewards" className="mt-1 text-xl font-bold tracking-tight text-navy sm:text-2xl">
+          <h2 id="your-rewards" className="mt-1 text-xl font-bold tracking-tight text-fg sm:text-2xl">
             Claimable balances
           </h2>
         </div>
@@ -92,7 +92,7 @@ export default function Rewards() {
         ) : (
           <>
             {wallet.wrongNetwork && (
-              <div role="alert" className="mb-4 flex flex-col gap-3 rounded-xl border border-red/30 bg-red-100 p-4 text-sm text-red sm:flex-row sm:items-center sm:justify-between">
+              <div role="alert" className="mb-4 flex flex-col gap-3 rounded-xl border border-red/40 bg-red-100 p-4 text-sm text-red sm:flex-row sm:items-center sm:justify-between">
                 <span className="inline-flex items-center gap-2">
                   <AlertTriangle className="size-4 shrink-0" />
                   Your wallet is on a different network than the reward contract. Claims are disabled.
@@ -113,13 +113,13 @@ export default function Rewards() {
               <div>
                 <p className="text-[11px] font-semibold tracking-[0.14em] text-muted uppercase">Total claimable</p>
                 {claimableRows.length === 0 ? (
-                  <p className="mt-1 text-base font-semibold text-navy">Nothing to claim right now.</p>
+                  <p className="mt-1 text-base font-semibold text-fg">Nothing to claim right now.</p>
                 ) : totalUsd !== null ? (
-                  <p className="tabular mt-1 text-2xl font-bold tracking-tight text-navy">
+                  <p className="tabular mt-1 text-2xl font-bold tracking-tight text-fg">
                     ≈ {formatNumber(totalUsd, { style: 'currency', currency: 'USD' })}
                   </p>
                 ) : (
-                  <p className="mt-1 text-base font-semibold text-navy">
+                  <p className="mt-1 text-base font-semibold text-fg">
                     {claimableRows.length} {claimableRows.length === 1 ? 'asset' : 'assets'} ready to claim
                     <span className="ml-2 text-xs font-normal text-muted">Fiat estimate not provided by backend.</span>
                   </p>

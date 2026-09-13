@@ -17,7 +17,7 @@ function Row({ label, children }) {
   return (
     <div className="flex items-start justify-between gap-4 py-3">
       <dt className="text-[11px] font-semibold tracking-[0.14em] text-muted uppercase">{label}</dt>
-      <dd className="tabular text-right text-sm font-semibold text-navy">{children}</dd>
+      <dd className="tabular text-right text-sm font-semibold text-fg">{children}</dd>
     </div>
   )
 }
@@ -38,7 +38,7 @@ export default function ProtocolStatus({ className = '' }) {
       <header className="flex items-center justify-between gap-3 border-b border-border px-5 py-4">
         <div>
           <p className="eyebrow">Protocol status</p>
-          <h2 id="protocol-status" className="mt-1 text-base font-bold tracking-tight text-navy">
+          <h2 id="protocol-status" className="mt-1 text-base font-bold tracking-tight text-fg">
             Reward engine
           </h2>
         </div>
@@ -117,11 +117,11 @@ export default function ProtocolStatus({ className = '' }) {
                 <p className="text-[11px] font-semibold tracking-[0.14em] text-muted uppercase">Last keeper gas estimate</p>
                 <dl className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-muted">
                   <dt>Estimated gas</dt>
-                  <dd className="tabular text-right text-navy">{formatNumber(Number(s.lastGasEstimate.gasLimit))}</dd>
+                  <dd className="tabular text-right text-fg">{formatNumber(Number(s.lastGasEstimate.gasLimit))}</dd>
                   <dt>Gas price</dt>
-                  <dd className="tabular text-right text-navy">{formatGwei(s.lastGasEstimate.gasPriceWei)}</dd>
+                  <dd className="tabular text-right text-fg">{formatGwei(s.lastGasEstimate.gasPriceWei)}</dd>
                   <dt>Estimated network cost</dt>
-                  <dd className="tabular text-right text-navy">
+                  <dd className="tabular text-right text-fg">
                     {formatWeiToNative(s.lastGasEstimate.totalWei)} {s.lastGasEstimate.nativeSymbol ?? ''}
                   </dd>
                 </dl>
@@ -129,8 +129,8 @@ export default function ProtocolStatus({ className = '' }) {
             )}
 
             {s.engine === 'deferred' && (
-              <div role="status" className="mb-4 flex gap-3 rounded-xl border border-blue-100 bg-light p-3.5 text-sm text-navy">
-                <PauseCircle className="mt-0.5 size-4 shrink-0 text-blue" />
+              <div role="status" className="mb-4 flex gap-3 rounded-xl border border-gold/30 bg-surface-2 p-3.5 text-sm text-fg">
+                <PauseCircle className="mt-0.5 size-4 shrink-0 text-gold" />
                 <div>
                   <p className="font-semibold">Reward processing deferred.</p>
                   <p className="mt-0.5 text-xs text-muted">

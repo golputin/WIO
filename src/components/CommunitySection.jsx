@@ -14,7 +14,7 @@ export default function CommunitySection() {
             </span>
             <div>
               <p className="eyebrow">Community</p>
-              <h2 className="mt-1 text-xl font-bold tracking-tight text-navy sm:text-2xl">Follow MarketLens on X</h2>
+              <h2 className="mt-1 text-xl font-bold tracking-tight text-fg sm:text-2xl">Follow MarketLens on X</h2>
               <p className="mt-1 text-sm text-muted">Product updates, market notes and protocol announcements.</p>
             </div>
           </div>

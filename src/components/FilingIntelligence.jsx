@@ -24,12 +24,12 @@ export default function FilingIntelligence({ symbol, onChangeSymbol }) {
             <Skeleton className="mt-2 h-7 w-56" />
           ) : a?.filing ? (
             <div className="mt-1 flex flex-wrap items-center gap-2.5">
-              <h3 className="text-2xl font-bold tracking-tight text-navy">{a.filing.company}</h3>
+              <h3 className="text-2xl font-bold tracking-tight text-fg">{a.filing.company}</h3>
               <Badge tone="blue">{a.filing.formType}</Badge>
               {a.filing.filedAt && <span className="text-xs text-muted">Filed {formatDate(a.filing.filedAt)}</span>}
             </div>
           ) : (
-            <h3 className="mt-1 text-2xl font-bold tracking-tight text-navy">{symbol ?? 'No company selected'}</h3>
+            <h3 className="mt-1 text-2xl font-bold tracking-tight text-fg">{symbol ?? 'No company selected'}</h3>
           )}
         </div>
         <div className="flex items-center gap-2">
@@ -75,11 +75,11 @@ export default function FilingIntelligence({ symbol, onChangeSymbol }) {
                   <div key={m.label} className="flex items-start justify-between gap-4">
                     <dt className="text-sm text-muted">{m.label}</dt>
                     <dd className="text-right">
-                      <p className="tabular text-sm font-semibold text-navy">{m.current}</p>
+                      <p className="tabular text-sm font-semibold text-fg">{m.current}</p>
                       {(m.previous || m.delta) && (
                         <p className="tabular text-xs text-muted">
                           {m.previous && <span>from {m.previous}</span>}
-                          {m.delta && <span className="ml-1.5 font-medium text-blue">{m.delta}</span>}
+                          {m.delta && <span className="ml-1.5 font-medium text-gold">{m.delta}</span>}
                         </p>
                       )}
                     </dd>
@@ -96,7 +96,7 @@ export default function FilingIntelligence({ symbol, onChangeSymbol }) {
             <BulletList items={a?.developments} loading={res.state === 'loading'} empty="No developments identified." />
             <div className="mt-6 flex items-center gap-2">
               <AlertTriangle className="size-3.5 text-muted" />
-              <p className="text-[11px] font-semibold tracking-[0.14em] text-navy uppercase">Key risks</p>
+              <p className="text-[11px] font-semibold tracking-[0.14em] text-fg uppercase">Key risks</p>
             </div>
             <div className="mt-3">
               <BulletList items={a?.risks} loading={res.state === 'loading'} empty="No new risk factors identified." />
@@ -108,7 +108,7 @@ export default function FilingIntelligence({ symbol, onChangeSymbol }) {
             {res.state === 'loading' ? (
               <SkeletonText lines={6} />
             ) : a?.summary ? (
-              <p className="text-sm leading-relaxed text-navy/90">{a.summary}</p>
+              <p className="text-sm leading-relaxed text-fg-2">{a.summary}</p>
             ) : (
               <p className="text-sm text-muted">No summary is available for this filing.</p>
             )}
@@ -132,10 +132,10 @@ export default function FilingIntelligence({ symbol, onChangeSymbol }) {
 
 function Panel({ icon: Icon, title, children, className = '', accent = false }) {
   return (
-    <div className={`bg-white p-5 sm:p-6 ${accent ? 'bg-gradient-to-b from-light/60 to-white' : ''} ${className}`}>
+    <div className={`bg-surface p-5 sm:p-6 ${accent ? 'bg-gradient-to-b from-surface-2/60 to-surface' : ''} ${className}`}>
       <div className="flex items-center gap-2">
-        <Icon className="size-3.5 text-blue" />
-        <p className="text-[11px] font-semibold tracking-[0.14em] text-navy uppercase">{title}</p>
+        <Icon className="size-3.5 text-gold" />
+        <p className="text-[11px] font-semibold tracking-[0.14em] text-fg uppercase">{title}</p>
       </div>
       <div className="mt-4">{children}</div>
     </div>
@@ -148,8 +148,8 @@ function BulletList({ items, loading, empty }) {
   return (
     <ul className="space-y-2">
       {items.map((it, i) => (
-        <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-navy/90">
-          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-blue" aria-hidden="true" />
+        <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-fg-2">
+          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
           {it}
         </li>
       ))}
