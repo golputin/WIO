@@ -1,0 +1,13 @@
+# Amp orb services: `amp orb services ensure` starts both and prints portal URLs.
+services:
+  api:
+    command: PORT=8787 npm start
+    cwd: server
+    port: 8787
+    readiness:
+      path: /health
+  web:
+    command: npm run dev -- --host 127.0.0.1 --port 5173
+    port: 5173
+    portal: true
+    depends_on: [api]
