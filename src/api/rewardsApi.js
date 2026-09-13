@@ -48,8 +48,11 @@ export async function getRewardAssets(signal) {
 }
 
 /** GET /balances/:address -> RewardBalance[] */
-export function getRewardBalances(address, signal) {
-  return request(base(), `/balances/${encodeURIComponent(address)}`, { signal, providerLabel: LABEL })
+export async function getRewardBalances(address, signal) {
+  const res = await request(base(), `/balances/${encodeURIComponent(address)}`, { signal, providerLabel: LABEL })
+  if (res.status !== 'ok') return res
+  const balances = Array.isArray(res.data) ? res.data : Array.isArray(res.data?.balances) ? res.data.balances : []
+  return ok(balances.map((item) => ({ ...item, claimable: item.claimable ?? item.balance ?? null })))
 }
 
 /** GET /history/:address -> RewardHistoryEntry[] */
