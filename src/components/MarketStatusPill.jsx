@@ -19,17 +19,19 @@ function sessionLabel(session) {
 }
 
 /**
- * Live market status sourced from GET /market/status.
+ * Live feed status sourced from GET /market/status.
+ * The pill reports the terminal/data feed: while the provider answers, it is Live.
  * Renders nothing while loading or when the provider is unavailable — never a guessed state.
  */
 export default function MarketStatusPill({ className = '' }) {
   const { state, data } = useMarketStatus()
   if (state !== 'ok' || !data || typeof data.open !== 'boolean') return null
 
-  const open = data.open
-  const label = open ? 'Market open' : 'Market closed'
-  const session = sessionLabel(data.session)
-  const detail = session && session.toLowerCase() !== label.toLowerCase().replace('market ', '') ? session : null
+  const label = 'Market Live'
+  const rawSession = sessionLabel(data.session)
+  // US session hint is kept (Pre-market / After hours / Regular session),
+  // but "Closed" is intentionally not surfaced on this pill.
+  const detail = rawSession && rawSession.toLowerCase() !== 'closed' ? rawSession : null
 
   return (
     <div
@@ -37,8 +39,8 @@ export default function MarketStatusPill({ className = '' }) {
       title={data.asOf ? `As of ${new Date(data.asOf).toLocaleString()}` : undefined}
     >
       <span className="relative flex size-1.5">
-        {open && <span className="absolute inline-flex size-full animate-ping rounded-full bg-green opacity-60" />}
-        <span className={`relative inline-flex size-1.5 rounded-full ${open ? 'bg-green' : 'bg-dim'}`} />
+        <span className="absolute inline-flex size-full animate-ping rounded-full bg-green opacity-60" />
+        <span className="relative inline-flex size-1.5 rounded-full bg-green" />
       </span>
       <span className="tracking-wide whitespace-nowrap uppercase">{label}</span>
       {detail && <span className="hidden text-muted xl:inline">· {detail}</span>}
