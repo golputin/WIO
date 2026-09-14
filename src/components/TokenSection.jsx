@@ -11,7 +11,8 @@ const CHAIN_LABELS = { robinhood: 'Robinhood Chain', solana: 'Solana', ethereum:
 function TokenChart() {
   const [state, setState] = useState('loading')
   const [points, setPoints] = useState([])
-  const url = tokenChartApiUrl('5m')
+  // WSEX/PONS may have sparse trades; 6h is the default live window while preserving real points only.
+  const url = tokenChartApiUrl('6h')
 
   useEffect(() => {
     if (!url) { setState('idle'); return undefined }
